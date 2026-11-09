@@ -1,0 +1,18 @@
+# secrets
+.env
+*.key
+
+# large / regenerable
+data/raw/
+outputs/llm_cache/
+outputs/bert_intent/
+outputs/*.joblib
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# private: keep the blind key away from reviewers until scoring is finished
+data/processed/human_key.csv
+
+# KEEP (commit these): data/processed/bitext_splits.parquet, split_manifest.json, eval_sets.parquet,
+# data/mappings/*, outputs/runs/*.jsonl, outputs/tables/*, outputs/figures/*
