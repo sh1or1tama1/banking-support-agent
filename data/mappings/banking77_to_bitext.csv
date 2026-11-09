@@ -1,0 +1,50 @@
+b77_intent,bitext_intent,confidence,rationale
+activate_my_card,activate_card,high,Same task: activating a newly received card
+card_swallowed,recover_swallowed_card,high,ATM kept the card
+lost_or_stolen_card,block_card,high,Customer must block a lost/stolen card
+compromised_card,block_card,medium,Fraud risk -> block card; may also need dispute
+terminate_account,close_account,high,Closing the account
+cancel_transfer,cancel_transfer,high,Same intent name and meaning
+wrong_amount_of_cash_received,dispute_ATM_withdrawal,high,ATM dispensed wrong amount -> dispute
+cash_withdrawal_not_recognised,dispute_ATM_withdrawal,medium,Unrecognised ATM withdrawal -> dispute (could also be fraud)
+passcode_forgotten,get_password,medium,App passcode vs online-banking password
+change_pin,set_up_password,low,PIN vs password: related but not identical; exclude from strict evaluation
+card_payment_fee_charged,check_fees,medium,Asking about a fee that was charged
+transfer_fee_charged,check_fees,medium,Asking about a transfer fee
+cash_withdrawal_charge,check_fees,medium,Asking about an ATM fee
+exchange_charge,check_fees,medium,Asking about an FX fee
+atm_support,find_ATM,low,"Mostly 'can I use ATM X', not 'where is an ATM'; exclude from strict evaluation"
+exchange_rate,UNSUPPORTED,high,No Bitext intent covers FX rates -> should escalate / decline
+exchange_via_app,UNSUPPORTED,high,No FX intent in Bitext
+fiat_currency_support,UNSUPPORTED,high,Currency support not covered
+supported_cards_and_currencies,UNSUPPORTED,high,Not covered
+apple_pay_or_google_pay,UNSUPPORTED,high,Mobile wallets not covered
+age_limit,UNSUPPORTED,high,Eligibility question; must not be answered from synthetic data
+country_support,UNSUPPORTED,high,Not covered
+visa_or_mastercard,UNSUPPORTED,high,Not covered
+verify_my_identity,UNSUPPORTED,high,KYC not covered
+why_verify_identity,UNSUPPORTED,high,KYC not covered
+unable_to_verify_identity,UNSUPPORTED,high,KYC not covered
+verify_source_of_funds,UNSUPPORTED,high,AML/KYC not covered
+lost_or_stolen_phone,UNSUPPORTED,high,Device security not covered
+get_disposable_virtual_card,UNSUPPORTED,high,Virtual cards not covered
+disposable_card_limits,UNSUPPORTED,high,Virtual cards not covered
+getting_virtual_card,UNSUPPORTED,high,Virtual cards not covered
+virtual_card_not_working,UNSUPPORTED,high,Virtual cards not covered
+top_up_limits,UNSUPPORTED,high,Top-up (e-money) not covered
+automatic_top_up,UNSUPPORTED,high,Top-up not covered
+topping_up_by_card,UNSUPPORTED,high,Top-up not covered
+top_up_by_cash_or_cheque,UNSUPPORTED,high,Top-up not covered
+top_up_failed,UNSUPPORTED,high,Top-up not covered
+top_up_reverted,UNSUPPORTED,high,Top-up not covered
+pending_top_up,UNSUPPORTED,high,Top-up not covered
+verify_top_up,UNSUPPORTED,high,Top-up not covered
+top_up_by_bank_transfer_charge,UNSUPPORTED,medium,Top-up fee (fees partially covered)
+top_up_by_card_charge,UNSUPPORTED,medium,Top-up fee (fees partially covered)
+card_arrival,UNSUPPORTED,high,Card delivery not covered
+card_delivery_estimate,UNSUPPORTED,high,Card delivery not covered
+order_physical_card,UNSUPPORTED,high,Card ordering not covered
+get_physical_card,UNSUPPORTED,high,Card ordering not covered
+getting_spare_card,UNSUPPORTED,high,Card ordering not covered
+card_about_to_expire,UNSUPPORTED,high,Card renewal not covered
+edit_personal_details,UNSUPPORTED,high,Profile editing not covered

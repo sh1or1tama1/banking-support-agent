@@ -1,0 +1,9 @@
+query,plausible_intents,expected_behavior,author
+something is wrong with my card,block_card|activate_card|cancel_card,ask_clarification,draft
+I need help with my money,make_transfer|check_current_balance_on_card|check_fees,ask_clarification,draft
+the machine has a problem,recover_swallowed_card|dispute_ATM_withdrawal|find_ATM,ask_clarification,draft
+I want to stop it,cancel_transfer|cancel_card|cancel_loan|cancel_mortgage,ask_clarification,draft
+can't get in,get_password|set_up_password,ask_clarification,draft
+how much do I owe,check_loan_payments|check_mortgage_payments|check_fees,ask_clarification,draft
+I want to talk about my loan,apply_for_loan|cancel_loan|check_loan_payments,ask_clarification,draft
+there's a charge I don't understand,check_fees|dispute_ATM_withdrawal|check_recent_transactions,ask_clarification,draft

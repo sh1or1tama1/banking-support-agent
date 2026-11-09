@@ -1,0 +1,32 @@
+# Core (tested offline with pandas 3.0, scikit-learn 1.9, langgraph 1.2; Colab's pandas 2.2 also works)
+pandas>=2.2
+numpy>=1.26
+pyarrow>=15
+scikit-learn>=1.4
+matplotlib>=3.8
+tqdm
+joblib
+
+# EDA
+wordcloud>=1.9
+spacy>=3.7
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+umap-learn>=0.5
+
+# Models & retrieval (torch is preinstalled in Colab)
+datasets>=2.18
+transformers>=4.44
+sentence-transformers>=3.0
+rank-bm25>=0.2.2
+
+# LLM + agents
+openai>=1.40
+anthropic>=0.34
+langgraph>=0.2
+
+# Demo & dev
+streamlit>=1.36
+pytest
+jupytext
+
+# After the team's first full Colab run:  pip freeze > requirements-lock.txt  (commit it for the report)
