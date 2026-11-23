@@ -1,0 +1,383 @@
+eval_id,eval_set,query,gold_intent,expected_action,reference_response,flags,source_id
+ev_0433,ambiguous,please stop my card,,clarify,,block_card|cancel_card,amb_027
+ev_0421,ambiguous,something's off with my balance,,clarify,,check_recent_transactions|check_current_balance_on_card|dispute_ATM_withdrawal,amb_015
+ev_0429,ambiguous,i forgot it,,clarify,,get_password|set_up_password,amb_023
+ev_0423,ambiguous,I'd like to open one,,clarify,,create_account|apply_for_loan|apply_for_mortgage,amb_017
+ev_0414,ambiguous,my card,,clarify,,activate_card|block_card|cancel_card|check_current_balance_on_card,amb_008
+ev_0415,ambiguous,I need to check something,,clarify,,check_recent_transactions|check_fees|check_loan_payments|check_current_balance_on_card,amb_009
+ev_0434,ambiguous,i lost it,,clarify,,block_card|get_password|recover_swallowed_card,amb_028
+ev_0237,b77_real_inscope,What should I do with my atm that got stuck?,recover_swallowed_card,answer,,,b77_11957
+ev_0207,b77_real_inscope,I would like to delete my account.,close_account,answer,,,b77_11892
+ev_0224,b77_real_inscope,Is there a limit on how much I can withdraw from my account without being charged?,check_fees,answer,,,b77_12911
+ev_0199,b77_real_inscope,Help me reset the passcode.,get_password,answer,,,b77_11541
+ev_0198,b77_real_inscope,I believe my credit card was stolen.,block_card,answer,,,b77_10476
+ev_0193,b77_real_inscope,"There are a few transaction that I don't recognize, I think someone managed to get my card details and use it.",block_card,answer,,,b77_11435
+ev_0176,b77_real_inscope,Something went wrong with my withdrawal. The amount of money isn't right.,dispute_ATM_withdrawal,answer,,,b77_10787
+ev_0234,b77_real_inscope,Can you freeze my card because someone used it while I was out of town. I did not make these purchases.,block_card,answer,,,b77_11410
+ev_0164,b77_real_inscope,I'm at an ATM and withdrew 30 pounds and was only given 10. What should I do?,dispute_ATM_withdrawal,answer,,,b77_10769
+ev_0154,b77_real_inscope,There is a fee on my account. Why?,check_fees,answer,,,b77_10838
+ev_0172,b77_real_inscope,I made an error in payment yesterday and I need it fixed asap because it's for my rent tomorrow.,cancel_transfer,answer,,,b77_10716
+ev_0184,b77_real_inscope,Is there a discount for frequently exchanging currencies?,check_fees,answer,,,b77_12796
+ev_0227,b77_real_inscope,Why am I being charged when I withdraw cash?,check_fees,answer,,,b77_12885
+ev_0187,b77_real_inscope,I didn't take out money from an ATM but my app statement shows that I did. How can I fix this?,dispute_ATM_withdrawal,answer,,,b77_12756
+ev_0244,b77_real_inscope,Oh no!  I lost my card!  Help!,block_card,answer,,,b77_10449
+ev_0158,b77_real_inscope,Where can I reset the passcode?,get_password,answer,,,b77_11545
+ev_0230,b77_real_inscope,I'm tired of all the problems I've had. I want to quit this account!,close_account,answer,,,b77_11888
+ev_0231,b77_real_inscope,"I received my new card, how is it activated?",activate_card,answer,,,b77_12850
+ev_0166,b77_real_inscope,What's the right way to activate my card?,activate_card,answer,,,b77_12849
+ev_0185,b77_real_inscope,My transaction needs to be canceled.,cancel_transfer,answer,,,b77_10713
+ev_0209,b77_real_inscope,"Why do I get charged additional fees on some payments, but not others?",check_fees,answer,,,b77_10807
+ev_0242,b77_real_inscope,Can you delete my account please?,close_account,answer,,,b77_11904
+ev_0180,b77_real_inscope,Please help me!  I need to cancel a transaction.,cancel_transfer,answer,,,b77_10722
+ev_0272,b77_unsupported,Can you please identify the problem with my bank card?,,escalate,,,b77_10370
+ev_0299,b77_unsupported,How come my cash deposit is not showing up. This can't be right. There must be some mistake. Where did my cash go. You better not have lost it as I need this money asap.,,escalate,,,b77_11078
+ev_0301,b77_unsupported,I don't know where this transaction came from?,,escalate,,,b77_11112
+ev_0343,b77_unsupported,"My beneficiary has been denied, is this normal?",,escalate,,,b77_12191
+ev_0258,b77_unsupported,Is it a good time to exchange?,,escalate,,,b77_10096
+ev_0294,b77_unsupported,Can I use my card for payment all over the world?,,escalate,,,b77_10965
+ev_0316,b77_unsupported,I have a strange direct debit in my statement,,escalate,,,b77_11485
+ev_0361,b77_unsupported,What does a disposable virtual card do?,,escalate,,,b77_12627
+ev_0285,b77_unsupported,"My top up hasn't worked, it's been stuck in pending for the last couple hours",,escalate,,,b77_10673
+ev_0309,b77_unsupported,Where is my PIN number located?,,escalate,,,b77_11268
+ev_0307,b77_unsupported,I am having trouble proving my identity.,,escalate,,,b77_11219
+ev_0373,b77_unsupported,I need some help with identity verification.,,escalate,,,b77_13016
+ev_0264,b77_unsupported,"Hi! I was wondering if you can help me. I used the city centre ATM to get some cash, but the machine declined my card. My account shows that transaction is still pending. I didn't receive the money, so please cancel that transaction.",,escalate,,,b77_10213
+ev_0344,b77_unsupported,Will salary be received through this?,,escalate,,,b77_12243
+ev_0363,b77_unsupported,I think my top up did not work,,escalate,,,b77_12664
+ev_0265,b77_unsupported,Why is a transaction showing as pending when I recieved cash from an ATM?,,escalate,,,b77_10214
+ev_0330,b77_unsupported,"My latest payment was declined, I was told everything was back to working order. What happened?",,escalate,,,b77_11815
+ev_0310,b77_unsupported,What do I have to do to get a Visa credit card?,,escalate,,,b77_11296
+ev_0369,b77_unsupported,"in china, need new card",,escalate,,,b77_12959
+ev_0254,b77_unsupported,Where is my new card? I have been waiting a week!,,escalate,,,b77_10021
+ev_0280,b77_unsupported,For some reason my contactless has stopped working. I don't know what the problem is. What can I do?,,escalate,,,b77_10573
+ev_0298,b77_unsupported,I submitted a cash deposit to my account but it hasn't posted yet.,,escalate,,,b77_11074
+ev_0320,b77_unsupported,I made a purchase and it says it's pending. What does that mean?,,escalate,,,b77_11624
+ev_0352,b77_unsupported,What locations can I top up with cash?,,escalate,,,b77_12461
+ev_0278,b77_unsupported,Can you unlock my pin? I think I entered the wrong pin too many times.,,escalate,,,b77_10538
+ev_0296,b77_unsupported,I went to top up and it is no longer there.  Was it sent back?,,escalate,,,b77_11022
+ev_0359,b77_unsupported,I used the ATM machine to get money out for Holiday shopping and saw the outrageous charges. Why is that? I would not have used the ATM if I had known!,,escalate,,,b77_12600
+ev_0347,b77_unsupported,Why did my transfer fail?,,escalate,,,b77_12297
+ev_0030,bitext_core,"I do not want to pay for my mortgage, czn you cancel it?",cancel_mortgage,answer,"I'm sorry to hear that you're experiencing financial difficulties and considering canceling your mortgage. I understand that this can be a stressful situation. However, canceling a mortgage is not as simple as stopping the payments. It's important to understand the implications and potential consequences of canceling your mortgage.
+
+I recommend contacting our {{Mortgage Department}} directly to discuss your situation in detail. They have the expertise to guide you through the process and explore alternative solutions that may be more suitable for your current circumstances.
+
+Please provide me with your {{Name}} and {{Contact Information}} so that I can connect you with the appropriate department. Rest assured, our team will do their best to assist you and find the best possible solution based on your specific needs.
+
+Remember, we're here to support you and provide assistance during this challenging time.",BCEIZ,bx_07678
+ev_0065,bitext_core,i got to create a fuking profile how to do it,create_account,answer,"I genuinely apologize if you're experiencing any frustration while trying to create your profile. I'm here to help you through the process. Creating a profile is simple and straightforward. Here's what you need to do:
+
+1. Visit our website at {{Company Website URL}}.
+2. Look for the ""Sign Up"" or ""Create Account"" button. It's usually located at the top right corner of the page.
+3. Click on the button and you'll be redirected to the registration page.
+4. Fill in the required information, such as your {{Name}}, {{Email Address}}, and {{Password}}.
+5. Make sure to review our Terms of Service and Privacy Policy before proceeding.
+6. Once you've entered all the necessary details, click on ""Create Profile"" or a similar button to complete the process.
+7. Congratulations! Your profile is now created.
+
+If you encounter any difficulties or have any additional questions, please let me know. I'm here to assist you every step of the way.",BCILQWZ,bx_16386
+ev_0064,bitext_core,i have to create a fucking account how can i do it,create_account,answer,"I genuinely apologize for any frustration you may have experienced while trying to create your online account. I understand that creating an account is an important step, and I'm here to assist you. Let's get you set up! Here's what you need to do:
+
+1. Visit our {{Company Website URL}}.
+2. Look for the ""Sign Up"" or ""Create an Account"" button.
+3. Click on it, and you'll be directed to a registration page.
+4. Fill in your required information, such as your name, email address, and a secure password.
+5. Review the terms and conditions, and if you agree, click on the ""Create Account"" button.
+6. You might receive a verification email to confirm your account. Please check your inbox and follow the instructions provided.
+7. Once your account is verified, you can log in and start exploring our services.
+
+If you encounter any difficulties during the registration process or have any additional questions, please let me know. I'm here to help!",BCIQW,bx_15970
+ev_0053,bitext_core,id like to check the mortgage payment i need assistance,check_mortgage_payments,answer,"I'm here to assist you with checking your mortgage payment. To get started, could you please provide me with your mortgage account number or any other identification details linked to your mortgage? With that information, I'll be able to pull up your payment details and provide you with accurate information.",BCPQ,bx_13404
+ev_0045,bitext_core,"I can't find my account fees , help me to see them",check_fees,answer,"I'm sorry to hear that you're having trouble finding your account fees. I'll assist you in locating them. Here's what you can do:
+
+1. Login to your account on our website or app.
+2. Look for the ""Account"" or ""Profile"" section.
+3. Within the account settings, you should find a tab or option labeled ""Fees"" or ""Billing.""
+4. Click on that section to view a breakdown of your account fees.
+
+If you're still having difficulty locating your account fees or if you have any specific questions about the fees, please provide me with your account details or any additional information, and I'll be glad to assist you further.",BCLMZ,bx_11193
+ev_0093,bitext_core,wanna transfer money online where can i perform a bank transfer to someone,make_transfer,answer,"I can help you with that! Making a bank transfer to someone online is convenient and easy. You have a few options for performing a bank transfer to someone:
+
+1. Online Banking: If you have access to online banking, you can log in to your account and navigate to the ""Transfer"" or ""Send Money"" section. From there, you can enter your friend's bank account details, including the account number and routing number, and specify the amount you want to transfer. Follow the prompts to complete the transfer.
+
+2. Mobile Banking App: If your bank has a mobile app, you can download it onto your smartphone or tablet. Open the app and look for the ""Transfer"" or ""Send Money"" feature. Enter your friend's bank account details, as mentioned earlier, and follow the prompts to complete the transfer.
+
+3. Person-to-Person Payment Apps: There are several popular person-to-person payment apps available, such as Venmo, PayPal, or Cash App. If you and your friend both have accounts on the same app, you can simply enter your friend's username or email associated with their app account and transfer the money directly.
+
+Remember, it's important to ensure the accuracy of the recipient's bank account details before initiating the transfer. Double-check the account number and routing number to avoid any issues.
+
+If you have any specific questions or need further assistance, feel free to let me know.",BCILQ,bx_23201
+ev_0091,bitext_core,I'd like to speak with a person can ya help em,human_agent,answer,"I'm sincerely sorry for any frustration or inconvenience you may have experienced while attempting to connect with a representative. I'm here to assist you! However, as an AI chatbot, I don't have the capability to connect you directly with a person. But don't worry, I'm equipped with the knowledge and expertise to help you with a wide range of issues. Please let me know what assistance you need, and I'll do my best to provide you with the right information and support.",BCILPQZ,bx_22558
+ev_0047,bitext_core,"I can't find my fees, help me to see them",check_fees,answer,"I deeply apologize for the inconvenience of not being able to find your fees. I'll assist you in locating them. Here's what you can do:
+
+1. Log in to your account on our website or mobile app.
+2. Navigate to the ""Billing"" or ""Account"" section.
+3. Look for an option like ""View Fees"" or ""Billing Details.""
+4. Click on that option to access the breakdown of your fees.
+
+If you encounter any difficulties or if the fees are not visible, please provide me with your account details or any relevant information so that I can investigate further and provide accurate assistance.
+
+Rest assured, I'm here to guide you every step of the way!",BCLM,bx_11736
+ev_0010,bitext_core,"I need to take out a loan, could I get some help?",apply_for_loan,answer,"I'm here to assist you with taking out a loan. Let's get you started on the right track. Here's what you need to know:
+
+1. Determine your loan needs: Consider how much money you need, the purpose of the loan, and your ability to make repayments.
+
+2. Research and compare options: Look into different lenders, loan types, and interest rates. This will help you find the best loan that suits your needs.
+
+3. Gather necessary documents: Most lenders require proof of identity, income, and residency. Be prepared to provide documents such as pay stubs, bank statements, and identification.
+
+4. Fill out the application: Once you've chosen a lender, complete the loan application form. Provide accurate and up-to-date information to avoid delays.
+
+5. Review the terms and conditions: Carefully read through the loan terms, including interest rates, repayment schedules, and any associated fees. It's essential to fully understand your obligations.
+
+6. Submit your application: After reviewing and double-checking your application, submit it to the lender. Keep any confirmation or reference numbers provided for future reference.
+
+7. Wait for the approval: The lender will review your application and may require additional documentation. This process may take some time, so be patient.
+
+8. Receive loan offer and review: If approved, you'll receive a loan offer. Take the time to review the terms and conditions of the offer before accepting it.
+
+9. Accept the loan offer: If you're satisfied with the terms, accept the loan offer as instructed by the lender. Be aware that accepting the offer is a binding agreement.
+
+10. Receive funds: Once you've accepted the loan offer, the lender will process your application and transfer the funds to your designated account.
+
+Remember, it's crucial to carefully consider your financial situation and only borrow what you can comfortably repay. If you have any specific questions or need further assistance during the loan application process, don't hesitate to ask. I'm here to help!",BCILP,bx_02615
+ev_0000,bitext_core,I need to activate a Master Cardonline,activate_card,answer,"I'm here to help you activate your {{Credit Card}} online. Let's get that done smoothly. Here's what you need to do:
+
+1. Visit our website at {{Company Website URL}} and log in to your account.
+2. Navigate to the ""Account"" or ""Profile"" section.
+3. Look for the ""Card Activation"" option or something similar.
+4. Click on it and follow the prompts to enter your card details, such as the card number, expiration date, and CVV.
+5. Once you've provided the required information, click on the ""Activate"" button.
+6. Congratulations! Your {{Credit Card}} is now activated and ready to use.
+
+If you encounter any hiccups during the process or need further assistance, feel free to reach out to our customer support team. They are available {{Customer Support Working Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website. We're here to ensure a seamless activation experience for you.",BLZ,bx_00116
+ev_0018,bitext_core,"I want to lockan Amex on mobile, how to do it?",block_card,answer,"I can help you with that. Here's how you can lock your {{Credit Card}} on your mobile:
+
+1. Open the Bank Mobile App}} on your mobile device.
+2. Login to your account using your username and password.
+3. Once you're logged in, navigate to the {{Card Management}} or {{Account Settings}} section.
+4. Look for the option to ""Lock Card"" or ""Temporarily Block Card"" and tap on it.
+5. Follow the on-screen prompts to confirm the card lock.
+
+If you're unable to find the exact steps, you can also refer to the Bank Mobile App}} user guide or get in touch with our customer support at {{Customer Support Phone Number}}. They will be more than happy to assist you with the process.
+
+Please remember, once you lock your card, it will be temporarily unavailable for use until you unlock it. If you suspect any fraudulent activity or have misplaced your card, locking it is a great way to protect your account. Let me know if you have any other questions or need further assistance!",BCILZ,bx_04613
+ev_0031,bitext_core,I'd like to cancel a mortgage where todo it,cancel_mortgage,answer,"I'm sorry to hear that you would like to cancel your mortgage. I'm here to assist you with that. Canceling a mortgage can be a significant decision, and it's important to go through the proper channels. Here's what you need to do:
+
+1. Contact our {{Mortgage Customer Support Team}} either by phone or email. They will guide you through the cancellation process and provide you with the necessary paperwork.
+2. Make sure to have your {{Mortgage Account Number}} and any other relevant information ready when contacting our support team.
+3. They will explain the cancellation process in detail, including any potential fees or penalties that may apply.
+4. Follow the instructions provided by our customer support team to complete the cancellation.
+
+Please keep in mind that canceling a mortgage may have financial implications, so it's essential to discuss the specifics with our customer support team. If you have any questions or concerns throughout the process, feel free to reach out to us. We're here to help you every step of the way.",BCIPQZ,bx_07926
+ev_0088,bitext_core,i got to speak with an fucking human agent will uhelp me,human_agent,answer,"We're accountable for, and we apologize for any frustration or inconvenience you may have experienced while trying to reach our customer support team. I understand that speaking to a real person is important to resolve your concerns effectively. Rest assured, I'm here to assist you. Please provide me with some information about your issue, and I'll do my best to help you.",BCILPQWZ,bx_21966
+ev_0095,bitext_core,"I need to pay to a friend, could you help me perform a bank transfer to someone?",make_transfer,answer,"I'd be happy to assist you with performing a bank transfer to your friend. Here's what you need to do:
+
+1. Log in to your online banking account.
+2. Navigate to the ""Transfer"" or ""Send Money"" section.
+3. Select the option for making a transfer to another person or an external bank account.
+4. Enter your friend's bank details, such as their account number and the bank's routing number.
+5. Specify the amount you want to transfer and any additional information required, such as the purpose of the transfer.
+6. Double-check all the details before submitting the transfer request.
+7. Confirm and authorize the transfer.
+8. Once the transfer is complete, make sure to notify your friend, so they are aware that the funds should be arriving soon.
+
+If you encounter any issues or have further questions during the process, feel free to let me know. I'm here to help!",BCILP,bx_23450
+ev_0077,bitext_core,"I would like to find an ATM in my area, where can I do it?",find_ATM,answer,"I'd be happy to help you find an ATM in your area. Here's what you can do:
+
+1. Use a map application on your smartphone or go to a popular search engine.
+2. Type in ""ATM near me"" or ""ATM in [your area or city name].""
+3. The map or search results will show you a list of nearby ATMs, along with their exact locations.
+4. You can also check if there are any ATMs located in nearby banks, convenience stores, or shopping centers.
+
+Remember to choose an ATM from a reliable bank or financial institution to ensure the safety of your transactions. If you need any further assistance or have any specific requirements, feel free to let me know. Happy banking!",BCILP,bx_19230
+ev_0004,bitext_core,"I'm traveling overseas, where to activate a Visa for international usage?",activate_card_international_usage,answer,"I'm happy to help! I'm here to assist you with activating your {{Credit Card}} for international usage so that you can conveniently use it while traveling overseas.
+
+To activate your {{Credit Card}} for international usage, you have a couple of options:
+
+1. Online Activation: Log in to your online banking portal or mobile banking app associated with your {{Credit Card}}. Look for the ""Card Services"" or ""Manage Cards"" section. From there, you should find an option to enable international usage for your card. Follow the prompts and confirm the activation.
+
+2. Customer Service: If you prefer to activate your card via phone, you can reach out to the customer service number provided on the back of your {{Credit Card}} or on your bank's website. Inform the customer service representative that you would like to activate your card for international usage. They will guide you through the necessary steps and assist you with any additional instructions.
+
+Remember, activating your {{Credit Card}} for international usage is important to ensure smooth transactions during your travels. If you encounter any difficulties or have further questions, please don't hesitate to reach out. Have a great trip!",BCIL,bx_01344
+ev_0080,bitext_core,i got to find a branch near me help me,find_branch,answer,"I'm here to help you find a branch near you! To locate the nearest branch, we have a few convenient options:
+
+1. Visit our website at {{Company Website URL}}. On the homepage, you'll find a 'Branch Locator' or 'Find a Branch' feature. Simply enter your current location or allow the website to access your location, and it will provide you with a list of branches nearby.
+
+2. Alternatively, you can use our mobile app. Download our app from the App Store or Google Play, log in to your account, and navigate to the 'Branch Locator' or 'Find a Branch' section. The app will determine your current location and display the closest branches.
+
+3. If you prefer a more personal touch, you can contact our customer support team at {{Customer Support Phone Number}}. They will be happy to assist you in finding a branch near you and provide you with any additional information you may need.
+
+Remember, our goal is to make your experience as seamless as possible, so please don't hesitate to reach out if you have any further questions or need further assistance.",BCLQ,bx_20244
+ev_0033,bitext_core,i have to cancel a fucking bank transfer were to do it,cancel_transfer,answer,"I regret that any inconvenience you may have experienced with your bank transfer. I understand that you would like to cancel it. Let me assist you with that:
+
+1. First, log in to your online banking account or contact your bank's customer service at {{Customer Service Phone Number}}.
+2. Provide them with the necessary details such as the transaction reference number, account details, and the amount of the transfer.
+3. Explain that you would like to cancel the transfer and request their assistance in doing so.
+4. Follow any additional steps or guidance provided by your bank's representative to ensure the cancellation is successfully processed.
+
+If you encounter any issues or require further guidance during the cancellation process, please don't hesitate to reach out. We're here to help you through this.",BCIQWZ,bx_08145
+ev_0012,bitext_core,where do I apply for a mortgage?,apply_for_mortgage,answer,"I can help you with that! Applying for a mortgage is an important step in securing your dream home. To get started, you have a few options:
+
+1. {{Bank Name}}: You can visit the nearest branch of {{Bank Name}} and speak with a mortgage specialist who will guide you through the application process.
+
+2. Online Application: Most banks and financial institutions provide an online platform where you can apply for a mortgage. Visit {{Bank Website}} and locate the ""Mortgage"" or ""Home Loans"" section. You'll find the online application form there.
+
+3. Phone Application: If you prefer a more personalized approach, you can call {{Bank Name}}'s mortgage helpline at {{Customer Support Phone Number}}. A dedicated mortgage advisor will assist you over the phone and help you with the application.
+
+Remember to gather all the necessary documents, such as proof of income, identification, and employment details, to streamline the application process. If you have any more questions or need further assistance, feel free to let me know. Good luck with your mortgage application!",BI,bx_03413
+ev_0026,bitext_core,"I got to cancel a loan , how do I do it?",cancel_loan,answer,"I've decoded that you need to cancel your loan, and I'm here to guide you through the process. Canceling a loan may vary depending on the specific details of your loan agreement. To cancel your loan, follow these general steps:
+
+1. Contact our customer support team at {{Customer Support Phone Number}} or by sending an email to {{Customer Support Email Address}}.
+2. Provide them with your loan details such as your {{Loan Account Number}} and any other relevant information.
+3. Explain your request to cancel the loan and the reason for your cancellation.
+4. Our dedicated team will assist you further and guide you through the necessary steps to cancel your loan.
+
+Please keep in mind that there may be specific terms and conditions associated with canceling your loan, such as potential fees or penalties. Our team will provide you with all the information you need and help you navigate the process smoothly. If you have any further questions or concerns, don't hesitate to reach out. We're here to support you.",BCIZ,bx_06937
+ev_0098,bitext_core,need to get back a swallowed card how do i do it,recover_swallowed_card,answer,"I understand how distressing it can be when your card gets swallowed by an ATM. Let's get you sorted out. Here's what you can do to retrieve your card:
+
+1. Contact your bank's customer service as soon as possible. They will guide you through the process and initiate the card retrieval request.
+
+2. Provide them with the necessary details like your account information, the location of the ATM, and the approximate time when the incident occurred. This information will help expedite the process.
+
+3. The bank will coordinate with the ATM service provider to retrieve your card safely. They will inform you about the next steps, such as picking up your card from the bank branch or having it mailed to you.
+
+Remember, it's crucial to act promptly to ensure the security of your account. If you have any specific questions or concerns, please let me know. I'm here to assist you throughout the process.",BCILQ,bx_24359
+ev_0055,bitext_core,i have to see the mortgage payments can i get some help,check_mortgage_payments,answer,"Definitely! I'm here to assist you with checking your mortgage payments. To help you access that information, could you please provide me with your {{mortgage account number}} or {{full name}} and {{address}} associated with the mortgage? Once I have these details, I'll be able to guide you through the process of checking your mortgage payments.",BCILMQ,bx_13509
+ev_0022,bitext_core,I got to cancel an Amex online,cancel_card,answer,"I've got that you need assistance with canceling an {{Credit Card}} online. I'm here to guide you through the process. Just follow these steps:
+
+1. Log in to your online banking account.
+2. Navigate to the ""Cards"" section or ""Manage Cards"" tab.
+3. Find the {{Credit Card}} you want to cancel and select it.
+4. Look for the ""Cancel Card"" or ""Close Card"" option and click on it.
+5. You may be asked to confirm the cancellation by providing reasons or answering security questions.
+6. Review the details and terms of cancellation before proceeding.
+7. Once you've confirmed the cancellation, your {{Credit Card}} should be successfully closed.
+
+If you encounter any difficulties or have further questions, please let me know. I'm here to assist you every step of the way.",B,bx_05641
+ev_0076,bitext_core,"I need to searfch for an ATM near me, could you help me?",find_ATM,answer,"I'm here to assist you in finding the nearest ATM. To help narrow down the options, could you please provide me with your current location? You can either share your address or a landmark nearby, and I'll do my best to find the closest ATMs in your area.",BCILPZ,bx_19181
+ev_0117,bitext_hard,"I can't pay for my loan, how do I canccel it?",cancel_loan,answer,"I'm sorry to hear that you're facing difficulties with paying off your loan and would like assistance with canceling it. I understand it can be a stressful situation, but don't worry, I'm here to help you out.
+
+To cancel your loan, you'll need to follow these steps:
+
+1. Contact our customer support team at {{Customer Support Phone Number}} or reach out to them via email at {{Customer Support Email Address}}. They will guide you through the cancellation process and provide any necessary forms or documents.
+
+2. Be prepared to provide your {{Loan Account Number}}, which can be found on your loan statement or in your online account.
+
+3. Explain your situation to the customer support representative. They will assist you in canceling the loan and may request additional information to complete the process.
+
+4. Once your loan cancellation has been confirmed, make sure to clarify any outstanding balance, if applicable, and confirm the next steps regarding repayments or any potential refunds.
+
+Remember, we are here to support you throughout this process. If you have any other questions or concerns, feel free to ask.",BCIZ,bx_06870
+ev_0143,bitext_hard,"I would like to know more about the fucking current balance on my credit crd, will you give me some information?",check_current_balance_on_card,answer,"I genuinely apologize for any frustration or inconvenience you may have experienced while trying to obtain information about your credit card balance. I'm here to assist you. 
+
+To access your current credit card balance, you have a few options:
+
+1. Online Banking: If you have an online banking account, you can log in using your credentials. Once logged in, navigate to the ""Account Summary"" or ""Credit Card"" section to view your current balance.
+
+2. Mobile Banking App: If you have the bank's mobile app installed on your smartphone, open the app and sign in. Look for the ""Credit Cards"" or ""Account Summary"" section to find your current balance.
+
+3. Customer Support: If you prefer to speak with a representative, you can contact our customer support team at {{Customer Support Phone Number}}. They will be happy to assist you in providing your current credit card balance.
+
+Please keep in mind that for security reasons, it is best not to share any personal or account information in this chat. I recommend using the official banking channels mentioned above for secure access to your credit card balance.
+
+If you have any further questions or need additional assistance, please let me know.",BCILPWZ,bx_10011
+ev_0134,bitext_hard,how could i get information about the fucking current balance on my crdeit cards,check_current_balance_on_card,answer,"I genuinely apologize for any inconvenience you may have experienced. I understand that you need assistance in checking the current balance on your credit cards. Rest assured, I'm here to help you out.
+
+To get information about the current balance on your credit cards, you have a few options:
+
+1. Online Banking: If you have enrolled in online banking, you can log in to your account on our website or mobile app. Once logged in, you should be able to view the balances of your credit cards under the ""Accounts"" or ""Credit Cards"" section. If you're unsure how to navigate to the balances, feel free to let me know, and I can guide you through the process.
+
+2. Customer Service: Alternatively, you can reach out to our customer service team by {{Customer Support Phone Number}} or through the Live Chat on our website at {{Company Website URL}}. They will be happy to provide you with the current balances of your credit cards and assist you further with any inquiries or concerns.
+
+Please keep in mind that you might need to provide some verification information to ensure the security of your accounts. If you have any other questions or need further assistance, don't hesitate to ask.",BILPQWZ,bx_10630
+ev_0149,bitext_hard,i do not have a passwordi need assistance setting up it,set_up_password,answer,"Definitely! I'm here to guide you through the process of setting up your password. Let's get started:
+
+1. Visit our website's login page.
+2. Look for the ""Forgot Password"" or ""Set Up Password"" option.
+3. Click on it to proceed.
+4. You will be prompted to enter your registered email address.
+5. After entering your email, check your inbox for a password reset email.
+6. Follow the instructions and create a new password. Make sure it meets the required criteria.
+7. Confirm your new password, and save the changes.
+
+If you encounter any difficulties or have any further questions, please don't hesitate to reach out. I'm here to assist you every step of the way!",BCEQZ,bx_24920
+ev_0121,bitext_hard,"I want a mortgage, could yo help me applying for it?",apply_for_mortgage,answer,"I can definitely assist you with applying for a mortgage. It's a significant step towards achieving your homeownership goals. Here's what you need to know:
+
+1. Choose the type of mortgage that suits your needs. You can select from fixed-rate, adjustable-rate, or government-backed mortgages depending on your financial situation and preferences.
+
+2. Gather all the necessary documents such as proof of income, employment history, credit history, tax information, and any additional documentation required by the lender. This will help speed up the application process.
+
+3. Research different lenders and compare their interest rates, terms, and fees. It's important to find a lender that offers competitive rates and excellent customer service.
+
+4. Complete the mortgage application form provided by the lender. Make sure to fill in all the required information accurately and honestly.
+
+5. Once you submit your application, the lender will review it and may ask for additional documentation or clarification if needed. Be prepared to provide any requested information promptly.
+
+6. The lender will assess your application, including factors such as your credit score, income, debt-to-income ratio, and employment history. This process may take some time, so it's important to be patient.
+
+7. If your application is approved, the lender will provide you with a mortgage offer detailing the terms and conditions of the loan. Take the time to review this offer carefully before accepting.
+
+8. If you decide to proceed, you'll need to sign the loan documents and complete any additional requirements specified by the lender.
+
+Remember that the mortgage application process can vary depending on the lender and your individual circumstances. If you have any specific questions or need further guidance, please feel free to ask. Good luck with your mortgage application!",BCIPZ,bx_03254
+ev_0152,bitext_hard,I'm trying to find a passwordcan i get some help,set_up_password,answer,"I'm happy to help! I'm here to help you set up a password for your account. Follow the steps below:
+
+1. Head over to the login page on our website.
+2. Look for the 'Forgot Password' option and click on it.
+3. You will be prompted to enter your registered email address.
+4. Check your email inbox for a password reset link.
+5. Click on the link and follow the instructions to create a new password.
+6. Make sure to choose a strong and unique password for enhanced security.
+7. Once you've successfully set up your new password, you'll be able to use it to login to your account.
+
+If you encounter any difficulties during this process, please feel free to reach out to our customer support team at {{Customer Support Email}} or {{Customer Support Phone Number}}. They will be glad to assist you further.",BCEIQZ,bx_25063
+ev_0130,bitext_hard,how to search for a branch  nearby,find_branch,answer,"I'm here to help you with finding a branch nearby. Here's how you can do it:
+
+1. Visit our website or open our mobile app.
+2. Look for the ""Branch Locator"" or ""Find a Branch"" section.
+3. Enter your location, such as your city, ZIP code, or address.
+4. Click on the ""Search"" or ""Find"" button.
+
+Once you do that, you'll see a list of branches near your area, along with their addresses, phone numbers, and operating hours. You can also use the map view to see their locations visually.
+
+If you need any further assistance or have any specific questions about a particular branch, feel free to let me know. I'm here to assist you!",BILQZ,bx_20826
+ev_0129,bitext_hard,i got to cancel a fucking user account could i get soe help,close_account,answer,"I genuinely apologize for any frustration or inconvenience you may have experienced with your account. I understand that you would like to cancel your user account, and I'm here to help. To proceed with the account cancellation, please follow these steps:
+
+1. Log in to your account on our website or app.
+2. Navigate to the account settings or profile section.
+3. Look for the option to close or delete your account.
+4. Follow the on-screen instructions to confirm the account closure.
+
+If you encounter any difficulties during the process, please don't hesitate to reach out to our customer support team at {{Customer Support Phone Number}} or through the live chat available on our website. They'll be more than happy to assist you further. Thank you for your understanding and cooperation.",BCILPQWZ,bx_15158
+ev_0136,bitext_hard,"I need to cancel a fucking bank transfer to a contact, will you help me?",cancel_transfer,answer,"Our team regrets and is sorry for any inconvenience you may have experienced with the bank transfer to a contact. I understand that you need assistance in canceling it. I'll be more than happy to help you with that. To cancel the bank transfer, please follow these steps:
+
+1. Log in to your {{Banking App}} or visit the {{Banking Website}}.
+2. Navigate to the ""Transfers"" or ""Payments"" section.
+3. Locate the specific transfer that you want to cancel.
+4. Select the transfer and look for the cancellation option.
+5. Follow the prompts to confirm the cancellation.
+
+If you encounter any difficulties or if you need further guidance, please don't hesitate to let me know. I'm here to ensure that your request is handled with utmost urgency and accuracy.",BCIPW,bx_08210
+ev_0123,bitext_hard,i want ehlp checking the mortgage payments,check_mortgage_payments,answer,"I'm happy to help! I'm here to assist you with checking your mortgage payments. To access your mortgage payment information, please follow these steps:
+
+1. Visit our website at {{Company Website URL}}.
+2. Log into your account using your registered email and password.
+3. Once you're logged in, navigate to the ""My Account"" or ""Account Dashboard"" section.
+4. Look for the ""Mortgage"" or ""Loan"" tab and click on it.
+5. You should be able to see an overview of your mortgage details, including payment history and upcoming payments.
+
+If you encounter any difficulties during this process or if you have any further questions, please don't hesitate to reach out. I'm here to help you every step of the way!",BMQZ,bx_13698
+ev_0116,bitext_hard,"I don't want to pay for my mortgage, I wold like to cancel it",cancel_mortgage,answer,"I'm genuinely sorry for any inconvenience you may be facing with your mortgage payments. I understand that you're looking to cancel your mortgage, and I'm here to assist you with that.
+
+Canceling a mortgage can be a significant decision, and it's important to understand the implications and potential penalties involved. To provide the most accurate guidance, I kindly request you to provide me with some additional information, such as your {{Name}}, {{Account Number}}, or {{Loan Reference Number}}. This will allow me to access your account and provide further assistance tailored to your specific situation.
+
+Once I have the necessary details, I can explain the process for canceling your mortgage, any potential fees or penalties that may apply, and the next steps to proceed. Our goal is to ensure a smooth transition and minimize any inconvenience you may experience throughout the process.
+
+Please feel free to share the requested information, and I'll be more than happy to assist you further.",BCPZ,bx_07336
+ev_0403,out_of_domain,My neighbor is noisy. What can I do?,,escalate,,non_banking,ood_027
+ev_0391,out_of_domain,Can you file my taxes for me?,,escalate,,non_banking,ood_015
+ev_0399,out_of_domain,How do I cancel my Netflix subscription?,,escalate,,non_banking,ood_023
+ev_0393,out_of_domain,What is my exact account balance today?,,escalate,,action_requires_auth,ood_017
+ev_0384,out_of_domain,What time does the movie theater open on Sunday?,,escalate,,non_banking,ood_008
+ev_0385,out_of_domain,How many calories are in a banana?,,escalate,,non_banking,ood_009
+ev_0404,out_of_domain,Explain quantum computing in simple terms.,,escalate,,non_banking,ood_028

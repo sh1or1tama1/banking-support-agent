@@ -1,0 +1,7 @@
+retriever,eval_set,recall@1,recall@5,mrr@5,n
+dense,b77_real_inscope,0.71,0.8,0.747,100
+dense,bitext_core,1.0,1.0,1.0,104
+dense,bitext_hard,0.92,1.0,0.957,50
+bm25,b77_real_inscope,0.3,0.4,0.336,100
+bm25,bitext_core,0.913,1.0,0.954,104
+bm25,bitext_hard,0.86,0.98,0.909,50
