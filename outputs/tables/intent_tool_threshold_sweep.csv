@@ -1,0 +1,29 @@
+tool,set,tool_accuracy,threshold,filter_used,recall@1,recall@3
+tfidf,val (synthetic),1.0,no filter,0.0,0.986,0.998
+tfidf,val (synthetic),1.0,0.6,0.998,0.999,1.0
+tfidf,val (synthetic),1.0,0.7,0.996,0.999,1.0
+tfidf,val (synthetic),1.0,0.8,0.994,0.996,0.998
+tfidf,val (synthetic),1.0,0.9,0.989,0.996,0.998
+tfidf,val (synthetic),1.0,0.95,0.976,0.996,0.998
+tfidf,val (synthetic),1.0,0.99,0.94,0.99,0.998
+tfidf,b77 train (real),0.394,no filter,0.0,0.642,0.713
+tfidf,b77 train (real),0.394,0.6,0.599,0.52,0.554
+tfidf,b77 train (real),0.394,0.7,0.499,0.547,0.588
+tfidf,b77 train (real),0.394,0.8,0.421,0.568,0.616
+tfidf,b77 train (real),0.394,0.9,0.32,0.595,0.647
+tfidf,b77 train (real),0.394,0.95,0.246,0.61,0.67
+tfidf,b77 train (real),0.394,0.99,0.119,0.64,0.709
+bert,val (synthetic),1.0,no filter,0.0,0.986,0.998
+bert,val (synthetic),1.0,0.6,1.0,1.0,1.0
+bert,val (synthetic),1.0,0.7,1.0,1.0,1.0
+bert,val (synthetic),1.0,0.8,1.0,1.0,1.0
+bert,val (synthetic),1.0,0.9,1.0,1.0,1.0
+bert,val (synthetic),1.0,0.95,1.0,1.0,1.0
+bert,val (synthetic),1.0,0.99,0.999,1.0,1.0
+bert,b77 train (real),0.43,no filter,0.0,0.642,0.713
+bert,b77 train (real),0.43,0.6,0.755,0.532,0.547
+bert,b77 train (real),0.43,0.7,0.682,0.552,0.575
+bert,b77 train (real),0.43,0.8,0.606,0.576,0.606
+bert,b77 train (real),0.43,0.9,0.481,0.605,0.642
+bert,b77 train (real),0.43,0.95,0.396,0.618,0.666
+bert,b77 train (real),0.43,0.99,0.234,0.641,0.709
