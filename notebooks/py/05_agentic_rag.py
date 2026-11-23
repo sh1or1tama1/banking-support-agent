@@ -2,10 +2,10 @@
 # # 05 · Task 2 challenger — Agentic RAG (LangGraph) + ablations
 # **Owner:** B (Task-2 lead) · **Phase 2**
 #
-# The v0 graph in `src/rag/agentic_rag.py` already runs end to end. B's job:
-# 1. Read and understand every node (you will defend it in Q&A) — draw it on paper once.
-# 2. Run on 20 queries, read the `trace` of failures, improve prompts (`prompts/agentic_*_v2.md` + CHANGELOG).
-# 3. Freeze the prompts, run the full eval set, then the ablations below.
+# Prompts are **frozen at v2** (2026-11-23). They were tuned on the 48-query dev set with
+# `scripts/dev_agentic.py`, never on the eval set; the record is in `prompts/CHANGELOG.md`.
+# The intent tool and its threshold were chosen on dev data with `scripts/choose_intent_tool.py`.
+# This notebook runs the frozen system on the full eval set, then the ablations below.
 #
 # | Run tag | What changes | Question it answers |
 # |---|---|---|
@@ -40,21 +40,28 @@ from src.classify.tfidf_lr import as_tool
 from src.llm.client import LLMClient
 from src.eval.harness import run_system, summarize, escalation_confusion, load_run
 
-LIMIT = 20   # development: 20 queries. Set to None for the frozen full run.
+LIMIT = int(os.getenv("LIMIT")) if os.getenv("LIMIT") else None   # None = full eval set
+PROMPTS = "v2"          # frozen, see prompts/CHANGELOG.md
+TOOL, THRESHOLD = "bert", 0.99   # chosen on dev data: outputs/tables/intent_tool_threshold_sweep.csv
 
 splits = pd.read_parquet(C.SPLITS_FILE)
 ev = pd.read_parquet(C.EVAL_SETS_FILE)
 kb = build_kb(splits)
 dense, bm25 = DenseRetriever(kb), BM25Retriever(kb)
-# Intent tool = best Task-1 classifier. Start with TF-IDF; swap in BERT once C has saved it.
-classifier = as_tool(joblib.load(C.OUTPUTS / "tfidf_lr.joblib"))
+# Intent tool = Task-1 classifier called by the agent (see TOOL above)
+if TOOL == "bert":
+    from src.classify.bert import BertIntent
+    classifier = BertIntent().as_tool()
+else:
+    classifier = as_tool(joblib.load(C.OUTPUTS / "tfidf_lr.joblib"))
+base = dict(intent_conf_threshold=THRESHOLD)
 llm = LLMClient()
 
 # %% [markdown]
 # ## 1. One query, full trace (use this to debug and to make the demo slide)
 
 # %%
-agent = AgenticRAG(llm, dense, bm25, classifier=classifier)
+agent = AgenticRAG(llm, dense, bm25, classifier=classifier, cfg=AgenticConfig(**base), prompt_version=PROMPTS)
 out = agent.answer("i lost my card yesterday and i also want to know how to send money to my brother")
 print(out["action"], "|", out["answer"][:300])
 for step in out["trace"]:
@@ -66,15 +73,16 @@ print({k: out[k] for k in ("n_llm_calls", "input_tokens", "output_tokens", "cost
 
 # %%
 variants = {
-    "agentic_full": AgenticConfig(),
-    "agentic_no_validation": AgenticConfig(use_validation=False),
-    "agentic_no_grading": AgenticConfig(use_grading=False),
-    "agentic_no_hybrid": AgenticConfig(use_hybrid=False),
-    "agentic_no_classifier": AgenticConfig(use_classifier_tool=False),
+    "agentic_full": AgenticConfig(**base),
+    "agentic_no_validation": AgenticConfig(**base, use_validation=False),
+    "agentic_no_grading": AgenticConfig(**base, use_grading=False),
+    "agentic_no_hybrid": AgenticConfig(**base, use_hybrid=False),
+    "agentic_no_classifier": AgenticConfig(**base, use_classifier_tool=False),
 }
 runs = {}
 for tag, cfg in variants.items():
-    runs[tag] = run_system(AgenticRAG(llm, dense, bm25, classifier=classifier, cfg=cfg, name=tag), ev, tag=tag, limit=LIMIT)
+    runs[tag] = run_system(AgenticRAG(llm, dense, bm25, classifier=classifier, cfg=cfg, name=tag, prompt_version=PROMPTS),
+                           ev, tag=tag, limit=LIMIT)
 
 # %%
 rows = []
