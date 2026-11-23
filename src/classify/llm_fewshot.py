@@ -38,6 +38,8 @@ class LLMFewShotClassifier:
     def predict_one(self, query: str) -> dict:
         r = self.llm.chat(self.system, USER.format(query=query), max_tokens=30)
         intent = str(parse_json(r.text).get("intent", "")).strip()
+        if intent not in self.labels and ":" in intent:  # the label list shows "CATEGORY: intent"; models copy it
+            intent = intent.rsplit(":", 1)[1].strip()
         return {"pred": intent if intent in self.labels else "INVALID", "raw": r.text,
                 "input_tokens": r.input_tokens, "output_tokens": r.output_tokens,
                 "cost_usd": r.cost_usd, "latency_s": r.latency_s}
