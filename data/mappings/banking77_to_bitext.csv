@@ -44,7 +44,35 @@ top_up_by_card_charge,UNSUPPORTED,medium,Top-up fee (fees partially covered)
 card_arrival,UNSUPPORTED,high,Card delivery not covered
 card_delivery_estimate,UNSUPPORTED,high,Card delivery not covered
 order_physical_card,UNSUPPORTED,high,Card ordering not covered
-get_physical_card,UNSUPPORTED,high,Card ordering not covered
+get_physical_card,UNSUPPORTED,high,Real queries ask where to find the PIN of a new physical card; PIN retrieval not covered
 getting_spare_card,UNSUPPORTED,high,Card ordering not covered
 card_about_to_expire,UNSUPPORTED,high,Card renewal not covered
 edit_personal_details,UNSUPPORTED,high,Profile editing not covered
+Refund_not_showing_up,UNSUPPORTED,high,Refund status needs account access; refunds not covered
+request_refund,UNSUPPORTED,high,Merchant refunds not covered
+reverted_card_payment?,UNSUPPORTED,high,Reverted card payments not covered
+declined_card_payment,UNSUPPORTED,high,Declined-payment troubleshooting needs account access
+declined_cash_withdrawal,UNSUPPORTED,high,Declined-withdrawal troubleshooting needs account access
+declined_transfer,UNSUPPORTED,high,Declined-transfer troubleshooting needs account access
+failed_transfer,UNSUPPORTED,high,Failed-transfer troubleshooting needs account access
+beneficiary_not_allowed,UNSUPPORTED,high,Beneficiary restrictions not covered
+transfer_not_received_by_recipient,UNSUPPORTED,high,Transfer tracing needs account access
+transfer_timing,UNSUPPORTED,high,Transfer processing times not covered (would require invented deadlines)
+pending_transfer,UNSUPPORTED,high,Status of a specific pending transfer needs account access
+transaction_charged_twice,UNSUPPORTED,high,Duplicate-charge disputes not covered
+direct_debit_payment_not_recognised,UNSUPPORTED,high,Direct-debit disputes not covered
+card_payment_wrong_exchange_rate,UNSUPPORTED,high,FX not covered
+wrong_exchange_rate_for_cash_withdrawal,UNSUPPORTED,high,FX not covered
+card_acceptance,UNSUPPORTED,high,Merchant/card acceptance not covered
+card_linking,UNSUPPORTED,high,Linking a card in the app not covered (activation is a different task)
+card_not_working,UNSUPPORTED,high,Card troubleshooting not covered
+contactless_not_working,UNSUPPORTED,high,Contactless not covered
+card_payment_not_recognised,UNSUPPORTED,medium,Card-payment dispute; Bitext only covers ATM disputes (block_card is only a partial answer)
+extra_charge_on_statement,UNSUPPORTED,medium,"Unknown statement charge, not a fee-information question; needs account access"
+pending_card_payment,UNSUPPORTED,medium,Pending status needs account access; check_recent_transactions only explains viewing
+pending_cash_withdrawal,UNSUPPORTED,medium,Pending status needs account access; check_recent_transactions only explains viewing
+balance_not_updated_after_bank_transfer,UNSUPPORTED,medium,Balance/transfer status needs account access
+balance_not_updated_after_cheque_or_cash_deposit,UNSUPPORTED,medium,Deposits not covered; status needs account access
+pin_blocked,UNSUPPORTED,medium,PIN unblocking not covered (set_up_password is about passwords)
+receiving_money,UNSUPPORTED,medium,Receiving money not covered (make_transfer is about sending)
+transfer_into_account,make_transfer,low,Ambiguous: own-account transfer vs top-up by bank transfer; excluded from evaluation
