@@ -1,0 +1,3 @@
+corpus,documents,tokens,vocabulary,type_token_ratio,hapax_legomena,mean_words_per_doc
+Bitext queries,25545,283089,3432,0.0121,1702,11.08
+Bitext responses,25545,3795002,4460,0.0012,782,148.56

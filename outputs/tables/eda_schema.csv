@@ -1,0 +1,6 @@
+column,dtype,non_null,null,empty_string,n_unique,example
+flags,string,25545,0,0,370,BCIPZ
+instruction,string,25545,0,0,25545,"I would like to acivate a card, can you help me?"
+category,string,25545,0,0,9,CARD
+intent,string,25545,0,0,26,activate_card
+response,string,25545,0,0,25545,I'm here to assist you with that! Activating your card is an

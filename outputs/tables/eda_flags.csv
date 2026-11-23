@@ -1,0 +1,11 @@
+flag,meaning,rows,share
+B,basic syntax,25545,1.0
+C,coordinated (multi-part),20567,0.8051282051282052
+I,interrogative,17954,0.7028381287923272
+Z,errors & typos,13071,0.5116852613035819
+L,semantic/lexical variation,12896,0.5048346055979643
+Q,colloquial,12706,0.49739675083186535
+P,polite,10960,0.42904678019181836
+W,offensive,3729,0.1459776864357017
+E,abbreviations,2728,0.10679193579956939
+M,morphological variation,1794,0.07022900763358779

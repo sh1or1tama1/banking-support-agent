@@ -1,0 +1,3 @@
+field,distinct_texts_%,distinct_opening_5grams_%,most_common_opening,rows_with_that_opening_%,most_common_closing,rows_with_that_closing_%
+instruction,100.0,25.21,i got to cancel a,1.04,could i get some help,2.77
+response,100.0,4.6,i'm here to assist you,18.27,know i'm here to help,10.1
