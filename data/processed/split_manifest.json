@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-22T22:02:09",
+  "seed": 42,
+  "near_dup_threshold": 0.9,
+  "n_rows": 25545,
+  "split_counts": {
+    "test": 3831,
+    "train": 17882,
+    "val": 3832
+  },
+  "split_fractions": {
+    "test": 0.15,
+    "train": 0.7,
+    "val": 0.15
+  },
+  "n_groups": 19193,
+  "n_label_conflict_rows": 0,
+  "intents_missing_from_split": {
+    "train": [],
+    "val": [],
+    "test": []
+  },
+  "test_ids_hash": "c9dc69de5256db74",
+  "leakage::grouped split (ours)": {
+    "median_max_sim": 0.9038,
+    "share_test_rows_with_near_copy_in_train(>=0.9)": 0.521
+  },
+  "leakage::random split": {
+    "median_max_sim": 0.9273,
+    "share_test_rows_with_near_copy_in_train(>=0.9)": 0.5994
+  }
+}
