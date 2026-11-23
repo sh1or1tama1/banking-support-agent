@@ -1,0 +1,7 @@
+comparison,full_only_right,other_only_right,mcnemar_exact_p
+agentic_full vs direct_llm,253,9,0.0
+agentic_full vs naive_rag,90,20,0.0
+agentic_full vs agentic_no_validation,0,1,1.0
+agentic_full vs agentic_no_grading,10,11,1.0
+agentic_full vs agentic_no_hybrid,12,12,1.0
+agentic_full vs agentic_no_classifier,14,17,0.7201
