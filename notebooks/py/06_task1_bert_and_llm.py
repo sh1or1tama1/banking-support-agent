@@ -10,7 +10,7 @@
 import sys, os, subprocess
 IN_COLAB = "google.colab" in sys.modules
 if IN_COLAB:  # Colab: clone the team repo once per session, install requirements, load API keys from Secrets
-    REPO_URL = "https://github.com/<your-team>/banking-support-agent.git"   # <- set once
+    REPO_URL = "https://github.com/sh1or1tama1/banking-support-agent.git"
     if not os.path.exists("/content/banking-support-agent"):
         subprocess.run(["git", "clone", REPO_URL, "/content/banking-support-agent"], check=True)
     os.chdir("/content/banking-support-agent")
