@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Project overview</title>
+<style>
+:root{--navy:#1d3461;--title:#1f3f8a;--sub:#5b6f94;--ink:#1f2937;--muted:#4b5563;--line:#d6e0ef;
+--blue-bg:#eef4fd;--blue-bd:#a9c4ec;--green:#2f8f57;--green-bg:#ecf8f0;--green-bd:#8fd0a6;--gray-bg:#f1f2f5;--gray-bd:#cfd3da;--purple-bg:#eeeafb;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1280px;height:720px;overflow:hidden;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;color:var(--ink);
+background:linear-gradient(180deg,#f7f9fd 0%,#ffffff 30%);position:relative}
+.waves{position:absolute;top:0;right:0}
+header{position:absolute;left:30px;top:2px;display:flex;align-items:center;gap:22px}
+header h1{font-size:37px;font-weight:800;color:var(--title);letter-spacing:-.3px}
+header p{font-size:20px;color:var(--sub);margin-top:2px}
+.col{position:absolute;top:104px;display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(30,50,90,.14);overflow:hidden}
+.card h2{background:var(--navy);color:#fff;font-size:19px;font-weight:700;padding:6px 12px;display:flex;align-items:center;gap:10px}
+.card h2 svg{width:22px;height:22px;flex:none}
+.body{padding:12px 16px}
+.goal{font-size:15px;line-height:1.38}
+.data-box{background:var(--blue-bg);border-radius:6px;padding:9px 12px;font-size:15px}
+.data-box b{display:block;color:var(--navy);margin-bottom:6px}
+.data-box div{display:flex;align-items:center;gap:12px;margin:5px 0 5px 6px}
+.data-box svg{width:17px;height:17px;flex:none}
+ul.rq{list-style:none;font-size:14.5px;line-height:1.36}
+ul.rq li{position:relative;padding-left:20px;margin-bottom:10px}
+ul.rq li:before{content:"";position:absolute;left:3px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+/* middle */
+.mid .body{padding:8px 16px 8px}
+.query{margin:0 auto;width:428px;background:#e8f0fc;border:1px solid var(--blue-bd);border-radius:6px;text-align:center;padding:4px 6px}
+.query .t{font-size:18px;font-weight:700;display:flex;justify-content:center;align-items:center;gap:8px}
+.query i{font-size:13.5px;color:#374151}
+.down{display:flex;justify-content:center;height:17px}
+.task{border:1px solid var(--blue-bd);border-radius:8px;background:#f5f9ff;padding:5px 12px 8px}
+.task h3{font-size:18px;color:var(--navy);display:flex;align-items:center;gap:8px;font-weight:700}
+.task h3 svg{width:20px;height:20px}
+.task .s{font-size:13.5px;color:#3b5487;margin:0 0 5px 28px}
+.row{display:flex;gap:12px}
+.opt{flex:1;min-width:0;border-radius:6px;text-align:center;padding:4px 6px 6px;font-size:15px;font-weight:600}
+.opt.base{background:var(--gray-bg);border:1px solid var(--gray-bd)}
+.opt.chal{background:#e3edfc;border:1px solid var(--blue-bd)}
+.badge{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 12px;border-radius:10px;margin-bottom:4px}
+.badge.g{background:#d7d9de;color:#1f2937}.badge.b{background:#1f4f9c;color:#fff}.badge.gr{background:var(--green);color:#fff}
+.badge.o{background:#fff;color:#6b7280;border:1px solid #b9bec7;font-weight:600}
+.t2 .base{flex:0 0 150px;display:flex;flex-direction:column;align-items:center;padding:6px 8px}
+.t2 .base .name{font-size:16px;font-weight:700;margin-bottom:6px}
+.pill{width:100%;background:#fff;border:1px solid var(--gray-bd);border-radius:5px;font-size:11.5px;font-weight:600;padding:4px 2px;line-height:1.25}
+.pill small{display:block;font-weight:400;color:var(--muted);font-size:10px}
+.ref{margin-top:auto;width:100%;border:1px dashed #b9bec7;border-radius:5px;padding:4px 2px 5px;background:#fafafa}
+.ref .n{font-size:12.5px;font-weight:700}.ref small{display:block;font-size:10px;color:var(--muted);font-weight:400}
+.t2 .chal{flex:1;background:var(--green-bg);border:1px solid var(--green-bd);padding:4px 7px 5px}
+.t2 .chal .name{font-size:16px;font-weight:700;margin-bottom:3px}
+.t2 .chal .name span{font-weight:400;font-size:12.5px;color:var(--muted)}
+.flowbox{border:1.5px dashed #5fb47f;border-radius:7px;background:#fbfefc;padding:3px 4px 2px}
+.flowbox .cap{font-size:11px;font-style:italic;color:var(--green);font-weight:600}
+.output{margin:0 auto;width:530px;background:var(--purple-bg);border-radius:7px;padding:5px 10px;display:flex;align-items:center;gap:14px;justify-content:center}
+.output .t{font-size:16.5px;font-weight:700}.output i{font-size:13.5px;color:#374151}
+/* right */
+table.ev{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:13.5px}
+table.ev td{padding:6px 9px;vertical-align:middle;line-height:1.25}
+table.ev td:first-child{background:#eef2f8;font-weight:700;width:168px;white-space:nowrap;border-radius:4px 0 0 4px}
+table.ev td:last-child{background:#fff;border:1px solid #eceff4;border-left:none}
+ul.del{list-style:none;font-size:14.5px;line-height:1.28}
+ul.del li{display:flex;gap:12px;margin-bottom:9px;align-items:flex-start}
+ul.del svg{width:20px;height:20px;flex:none;margin-top:1px}
+ul.del small{font-size:15px}
+</style></head><body>
+
+<svg class="waves" width="300" height="95" viewBox="0 0 300 95"><path d="M60 95 C140 70 200 30 300 0 V95Z" fill="#e3ebf8"/><path d="M150 95 C210 75 250 40 300 20 V95Z" fill="#d3e0f4"/><path d="M90 0 C170 5 250 0 300 0 V0Z" fill="#e3ebf8"/></svg>
+
+<header>
+ <svg width="64" height="62" viewBox="0 0 64 62"><path d="M32 2 L62 18 H2 Z" fill="#2563b8"/><rect x="4" y="20" width="56" height="5" fill="#2563b8"/>
+ <g fill="#2563b8"><rect x="9" y="28" width="8" height="22"/><rect x="22" y="28" width="8" height="22"/><rect x="35" y="28" width="8" height="22"/><rect x="48" y="28" width="8" height="22"/></g>
+ <rect x="2" y="52" width="60" height="7" fill="#2563b8"/><circle cx="32" cy="12" r="2.5" fill="#fff"/></svg>
+ <div><h1>Intelligent Banking Customer Support Agent</h1><p>A Comparative Study of Intent Classification and Grounded Response Generation</p></div>
+</header>
+
+<!-- LEFT -->
+<div class="col" style="left:8px;width:282px">
+ <div class="card"><h2><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12 L21 3"/></svg>Project Goal</h2>
+  <div class="body goal">Build a banking customer support agent and compare different NLP and LLM methods to find more accurate, reliable, and grounded solutions.</div></div>
+ <div class="card"><h2><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Data</h2>
+  <div class="body" style="padding:10px 12px"><div class="data-box"><b>Bitext Retail Banking Dataset</b>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#2563b8" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M9 11h7M9 15h7"/></svg>≈ 25,545 Q&amp;A pairs</div>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#2563b8" stroke-width="2"><path d="M12 3 2 8l10 5 10-5zM2 13l10 5 10-5M2 17.5l10 5 10-5"/></svg>26 customer intents</div>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#2563b8" stroke-width="2"><rect x="3" y="3" width="7.5" height="7.5"/><rect x="13.5" y="3" width="7.5" height="7.5"/><rect x="3" y="13.5" width="7.5" height="7.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5"/></svg>9 business categories</div>
+  </div></div></div>
+ <div class="card"><h2><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff"/><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="800" fill="#1d3461" font-family="Arial">?</text></svg>Research Questions</h2>
+  <div class="body" style="padding:10px 14px 2px"><ul class="rq">
+   <li>Does a transformer model (BERT) perform better than a traditional NLP model for intent classification?</li>
+   <li>Can an agentic RAG (multi-step retrieval and answer validation) generate more reliable, evidence-grounded responses than a naive RAG?</li>
+  </ul></div></div>
+</div>
+
+<!-- MIDDLE -->
+<div class="col mid" style="left:306px;width:576px">
+ <div class="card"><h2><svg viewBox="0 0 24 24" fill="#fff"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>System Overview</h2>
+ <div class="body">
+  <div class="query"><div class="t"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1d3461"><circle cx="12" cy="7" r="4.5"/><path d="M3 22c0-5 4-8 9-8s9 3 9 8z"/></svg>Customer Query</div><i>“I lost my credit card. What should I do?”</i></div>
+  <div class="down"><svg width="14" height="17"><path d="M7 0V13" stroke="#1d3461" stroke-width="2"/><path d="M2 10 7 16 12 10" fill="none" stroke="#1d3461" stroke-width="2"/></svg></div>
+
+  <div class="task"><h3><svg viewBox="0 0 24 24" fill="none" stroke="#1f4f9c" stroke-width="2.6"><circle cx="10" cy="10" r="6.5"/><path d="M15 15 21 21"/></svg>Task 1:&nbsp; Intent Classification</h3>
+   <div class="s">Identify the customer’s banking intent</div>
+   <div class="row"><div class="opt base"><span class="badge g">Baseline</span><br>TF-IDF + Logistic Regression</div>
+    <div class="opt chal"><span class="badge b">Challenger</span><br>Fine-tuned BERT</div></div></div>
+  <div class="down"><svg width="14" height="17"><path d="M7 0V13" stroke="#1d3461" stroke-width="2"/><path d="M2 10 7 16 12 10" fill="none" stroke="#1d3461" stroke-width="2"/></svg></div>
+
+  <div class="task t2"><h3><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6L4.5 21l4.3-2.4c1 .3 2.1.4 3.2.4 5.5 0 10-3.6 10-8s-4.5-8-10-8z" fill="#1f4f9c"/><g fill="#fff"><circle cx="7.5" cy="11" r="1.4"/><circle cx="12" cy="11" r="1.4"/><circle cx="16.5" cy="11" r="1.4"/></g></svg>Task 2: Response Generation</h3>
+   <div class="s">Generate a helpful, grounded and reliable response</div>
+   <div class="row">
+    <div class="opt base"><span class="badge g">Baseline</span><div class="name">Naive RAG</div>
+     <div class="pill">Retrieve top-k once<small>dense retrieval</small></div>
+     <svg width="12" height="14"><path d="M6 0V10" stroke="#6b7280" stroke-width="1.6"/><path d="M2 8 6 13 10 8" fill="none" stroke="#6b7280" stroke-width="1.6"/></svg>
+     <div class="pill">Generate once<small>LLM + retrieved context</small></div>
+     <div class="ref" style="margin-top:10px"><span class="badge o" style="margin-bottom:2px">Reference</span><div class="n">Direct LLM</div><small>no retrieval · lower bound</small></div>
+    </div>
+    <div class="opt chal"><span class="badge gr">Challenger</span><div class="name">Agentic RAG <span>(LangGraph)</span></div>
+     <div class="flowbox">
+      <svg width="100%" viewBox="0 0 346 150" style="display:block" font-family="-apple-system,Helvetica Neue,Arial">
+       <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#3d7a55"/></marker>
+        <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#b45309"/></marker></defs>
+       <g font-size="11.5" font-weight="700" text-anchor="middle" fill="#1f2937">
+        <rect x="2" y="4" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="52" y="20">1 Analyze</text>
+        <rect x="123" y="4" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="173" y="20">2 Hybrid Retrieve</text>
+        <rect x="244" y="4" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="294" y="20">3 Grade</text>
+        <rect x="244" y="84" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="294" y="101">4 Generate</text>
+        <rect x="123" y="84" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="173" y="101">5 Validate</text>
+        <rect x="2" y="84" width="100" height="40" rx="6" fill="#fff" stroke="#8fd0a6"/><text x="52" y="101">Answer</text>
+       </g>
+       <g font-size="9" text-anchor="middle" fill="#4b5563">
+        <text x="52" y="33">intent · sub-questions</text>
+        <text x="173" y="33">dense + BM25 (RRF)</text>
+        <text x="294" y="33">relevant evidence?</text>
+        <text x="294" y="114">grounded draft</text>
+        <text x="173" y="114">supported? safe?</text>
+        <text x="52" y="114">or escalate</text>
+       </g>
+       <g stroke="#3d7a55" stroke-width="1.6" fill="none" marker-end="url(#a)">
+        <path d="M102 25H121"/><path d="M223 25H242"/>
+        <path d="M322 44V82"/><path d="M244 104H225"/><path d="M123 104H104"/>
+       </g>
+       <rect x="138" y="53" width="92" height="21" rx="10.5" fill="#fff4e5" stroke="#f0b46a"/>
+       <text x="184" y="67.5" font-size="10.5" font-weight="700" text-anchor="middle" fill="#92400e">Rewrite query</text>
+       <g stroke="#b45309" stroke-width="1.5" fill="none" stroke-dasharray="4 2.5" marker-end="url(#r)">
+        <path d="M268 44V63.5H232"/><path d="M156 53V46"/>
+        <path d="M173 124V136H294V126"/>
+       </g>
+       <text x="236" y="58" font-size="9.5" fill="#92400e" text-anchor="start">none</text>
+       <text x="327" y="66" font-size="9.5" fill="#3d7a55">ok</text>
+       <text x="233" y="147" font-size="9.5" fill="#92400e" text-anchor="middle">validation fails → revise once</text>
+      </svg>
+      <div class="cap">Bounded loops: ≤ 2 retrieval rounds · ≤ 1 revision</div>
+     </div>
+    </div>
+   </div></div>
+  <div class="down"><svg width="14" height="17"><path d="M7 0V13" stroke="#1d3461" stroke-width="2"/><path d="M2 10 7 16 12 10" fill="none" stroke="#1d3461" stroke-width="2"/></svg></div>
+  <div class="output"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4c3d9e" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg>
+   <div><div class="t">Output: Reliable Banking Support Response</div><i>“Please contact your bank to report the lost card …”</i></div></div>
+ </div></div>
+</div>
+
+<!-- RIGHT -->
+<div class="col" style="left:902px;width:370px">
+ <div class="card"><h2><svg viewBox="0 0 24 24" fill="#fff"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg>Evaluation</h2>
+  <div class="body" style="padding:6px 8px 8px"><table class="ev">
+   <tr><td>Intent Classification</td><td>Accuracy, Macro F1</td></tr>
+   <tr><td>Response Quality</td><td>Relevance, Completeness, Clarity (human evaluation)</td></tr>
+   <tr><td>Reliability</td><td>Unsupported claim rate, Error rate, Reasonable escalation</td></tr>
+   <tr><td>Efficiency</td><td>Inference latency, Token usage, Cost</td></tr>
+  </table></div></div>
+ <div class="card"><h2><svg viewBox="0 0 24 24" fill="#fff"><path d="M5 2h2v20H5z"/><path d="M7 3h13l-3 5 3 5H7z"/></svg>Expected Deliverables</h2>
+  <div class="body" style="padding:11px 16px 2px"><ul class="del">
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="#1d3461" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg><span>Two intent classification models<br>(TF-IDF + LR, BERT)</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="#1d3461" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg><span>Two response generation methods<br>(Naive RAG, Agentic RAG) + Direct LLM reference</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="#1d3461" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg><span>Comparative experimental results and analysis</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="#1d3461" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg><span>A <b>Streamlit</b> demo (interactive banking chatbot)</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="#1d3461" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 12.5 10.5 16 17 8.5"/></svg><span>Final report and presentation</span></li>
+  </ul></div></div>
+</div>
+</body></html>
