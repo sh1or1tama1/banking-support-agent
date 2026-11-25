@@ -1,0 +1,4 @@
+tp,fp,fn,tn,precision,recall,f1,system
+22,6,130,248,0.7857,0.1447,0.2444,direct_llm
+38,11,114,243,0.7755,0.25,0.3781,naive_rag
+91,36,61,218,0.7165,0.5987,0.6523,agentic_full

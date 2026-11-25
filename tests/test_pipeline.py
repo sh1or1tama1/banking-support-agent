@@ -124,3 +124,34 @@ def test_ablation_switches_skip_llm_calls(standin):
     agent, llm = make_agent(standin, {ANALYZE: BANKING, GENERATE: ANSWER}, use_grading=False, use_validation=False)
     out = agent.answer("block my card")
     assert out["action"] == "answer" and llm.calls == [ANALYZE, GENERATE]
+
+
+def test_auto_checks_ignore_customer_amounts():
+    from src.eval.harness import auto_checks
+    d = pd.DataFrame({"query": ["I asked for $100 but only got $20", "hi"],
+                      "answer": ["Sorry you got $20 instead of $100.", "The fee is $5, call 1-800-555-1234"]})
+    out = auto_checks(d)
+    assert out["invented_any_specific"].tolist() == [False, True]
+
+
+def test_disagreements_and_merge_final():
+    from src.eval.judge import ITEMS, disagreements, merge_final
+    base = {"eval_id": ["e1", "e1"], "blind_system": ["S1", "S2"], "query": ["q", "q"], "answer": ["a", "b"]}
+    a = pd.DataFrame({**base, **{k: [1, 1] for k in ITEMS}})
+    b = pd.DataFrame({**base, **{k: [1, 1] for k in ITEMS}})
+    b.loc[1, "relevance"] = 2
+    d = disagreements(a, b)
+    assert len(d) == 1 and d.iloc[0]["item"] == "relevance"
+    d["agreed"] = [2]
+    final = merge_final(a, d)
+    assert final.loc[1, "relevance"] == 2 and final.loc[0, "relevance"] == 1
+
+
+def test_load_ratings_joins_sheet(tmp_path):
+    from src.eval.judge import ITEMS, load_ratings
+    sheet = pd.DataFrame({"eval_id": ["e1"], "blind_system": ["S1"], "query": ["q"], "expected_action": ["answer"],
+                          "action": ["answer"], "answer": ["a"], **{k: [None] for k in ITEMS}, "notes": [""]})
+    sheet.to_csv(tmp_path / "sheet.csv", index=False)
+    pd.DataFrame({"eval_id": ["e1"], "blind_system": ["S1"], **{k: [1] for k in ITEMS}, "notes": ["x"]}).to_csv(tmp_path / "r.csv", index=False)
+    r = load_ratings(tmp_path / "r.csv", tmp_path / "sheet.csv")
+    assert r.loc[0, "query"] == "q" and r.loc[0, "relevance"] == 1

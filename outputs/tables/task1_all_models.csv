@@ -1,0 +1,9 @@
+model,eval_set,n,accuracy,macro_f1,ms_per_query,invalid_label_rate,cost_usd
+tfidf_lr,bitext_test_full,3831,0.9992,0.9991,0.04,,
+bert_finetuned,bitext_test_full,3831,0.9992,0.9992,5.739,,
+tfidf_lr,bitext_test_subset,520,0.9981,0.9981,0.049,,
+bert_finetuned,bitext_test_subset,520,1.0,1.0,5.661,,
+llm_fewshot,bitext_test_subset,520,0.9442,0.9429,589.744,0.0,0.1371
+tfidf_lr,banking77_mapped,520,0.4096,0.5158,0.048,,
+bert_finetuned,banking77_mapped,520,0.4769,0.5674,13.942,,
+llm_fewshot,banking77_mapped,520,0.6923,0.8531,613.313,0.2077,0.1367

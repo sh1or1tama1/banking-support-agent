@@ -28,7 +28,7 @@ tests/               offline tests: split integrity, KB train-only, prompt rende
 
 ## Quick start (Google Colab, T4 GPU)
 ```python
-!git clone https://github.com/<team>/banking-support-agent.git
+!git clone https://github.com/sh1or1tama1/banking-support-agent.git
 %cd banking-support-agent
 !pip -q install -r requirements.txt
 ```

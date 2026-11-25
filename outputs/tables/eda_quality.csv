@@ -1,0 +1,12 @@
+check,value
+rows,25545
+intents,26
+categories,9
+exact duplicate instructions,0
+duplicate instructions (case/space-insensitive),110
+"duplicate (instruction, response) pairs",0
+duplicate responses,0
+instructions mapped to >1 intent,0
+responses containing {{placeholders}},14064
+instructions containing {{placeholders}},0
+rows with no flags,0

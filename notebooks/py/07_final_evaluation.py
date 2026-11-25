@@ -11,7 +11,7 @@
 import sys, os, subprocess
 IN_COLAB = "google.colab" in sys.modules
 if IN_COLAB:  # Colab: clone the team repo once per session, install requirements, load API keys from Secrets
-    REPO_URL = "https://github.com/<your-team>/banking-support-agent.git"   # <- set once
+    REPO_URL = "https://github.com/sh1or1tama1/banking-support-agent.git"
     if not os.path.exists("/content/banking-support-agent"):
         subprocess.run(["git", "clone", REPO_URL, "/content/banking-support-agent"], check=True)
     os.chdir("/content/banking-support-agent")
@@ -26,7 +26,7 @@ import pandas as pd, matplotlib.pyplot as plt
 from IPython.display import display
 from src import config as C
 from src.eval.harness import load_run, summarize, escalation_confusion, auto_checks
-from src.eval.judge import make_human_sheet, agreement, judge_run, judge_vs_human, score_table
+from src.eval.judge import make_human_sheet, agreement, judge_run, judge_vs_human, score_table, disagreements, merge_final, load_ratings
 from src.utils import style_axes, savefig
 
 ev = pd.read_parquet(C.EVAL_SETS_FILE)
@@ -69,7 +69,8 @@ savefig(fig, "task2_behaviour_by_set"); plt.show()
 # %% [markdown]
 # ## 2. Blinded human rubric (100 queries × 3 systems = 300 items per reviewer)
 # Run the first cell once, share `human_sheet.csv` with both reviewers (NOT `human_key.csv`).
-# Each reviewer fills a copy (`reviewer_1.csv`, `reviewer_2.csv`) using the rubric in `prompts/judge_v1.md`.
+# Each reviewer scores the 300 replies in the Rating Desk page (or in a copy of the CSV) and saves
+# `reviewer_1.csv` (Ryusei) / `reviewer_2.csv` (Szuyu) into data/processed/. Rubric: `prompts/judge_v1.md`.
 
 # %%
 subset_ids = pd.read_csv(C.PROCESSED / "human_eval_subset.csv")["eval_id"].tolist()
@@ -80,23 +81,57 @@ if not sheet_path.exists():
     print("Share", sheet_path, "with reviewers")
 
 # %%
-r1, r2 = C.PROCESSED / "reviewer_1.csv", C.PROCESSED / "reviewer_2.csv"
+r1, r2 = C.PROCESSED / "reviewer_1.csv", C.PROCESSED / "reviewer_2.csv"   # Ryusei, Szuyu
+final_h = C.PROCESSED / "human_final.csv"
 if r1.exists() and r2.exists():
-    a, b = pd.read_csv(r1), pd.read_csv(r2)
-    display(agreement(a, b))   # report these kappas; then adjudicate disagreements -> human_final.csv
+    a, b = load_ratings(r1), load_ratings(r2)   # works for full sheets and for Rating Desk CSVs
+    kappa = agreement(a, b); display(kappa); kappa.to_csv(C.TABLES / "task2_human_kappa.csv", index=False)
+    dis = disagreements(a, b)                     # one row per (item, rubric field) where the raters differ
+    dis.to_csv(C.PROCESSED / "human_disagreements.csv", index=False)
+    print(len(dis), "disagreements -> both raters fill the `agreed` column together in human_disagreements.csv")
+    resolved = C.PROCESSED / "human_disagreements_resolved.csv"
+    if resolved.exists():
+        merge_final(a, pd.read_csv(resolved)).to_csv(final_h, index=False)
+        print("wrote", final_h)
 
 # %% [markdown]
-# ## 3. LLM-as-a-judge (validated against humans, then applied to all queries)
+# ## 3. LLM-as-a-judge: Claude Sonnet 5.5 (a different provider and a stronger model than the generator)
+# The generator is OpenAI `gpt-5.4-nano`, so judging with Anthropic avoids self-preference bias.
+# Needs `ANTHROPIC_API_KEY` (Colab Secrets or env). Expected cost: about $1 for the 300-item subset and about
+# $4 more for all 436 × 3 answers. Every call is cached, so a re-run is free.
+# Step 3a judges the human subset only and checks agreement with humans; only if agreement is acceptable
+# (kappa ≥ 0.4 on most items) run 3b on the full set and report judge scores for every query.
 
 # %%
 from src.llm.client import LLMClient
-judge_llm = LLMClient()   # ideally set a different/stronger model for the judge via env vars
-judged = pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in runs.items()])
-judged.to_csv(C.TABLES / "task2_judge_scores_raw.csv", index=False)
-display(score_table(judged, ev))
-final_h = C.PROCESSED / "human_final.csv"
-if final_h.exists():
-    display(judge_vs_human(judged, pd.read_csv(final_h), pd.read_csv(key_path)))
+judge_llm = LLMClient(provider=os.getenv("JUDGE_PROVIDER", "anthropic"),
+                      model=os.getenv("JUDGE_MODEL", "claude-sonnet-5-5"),
+                      price_in_per_m=float(os.getenv("JUDGE_PRICE_IN_PER_M", 2.0)),
+                      price_out_per_m=float(os.getenv("JUDGE_PRICE_OUT_PER_M", 10.0)),
+                      max_tokens=300)
+print("judge:", judge_llm.provider, judge_llm.model)
+# Without a key the judge cells are skipped, so sections 1-2 can run first (e.g. before the API key exists).
+HAVE_JUDGE = judge_llm.provider == "mock" or bool(os.getenv("ANTHROPIC_API_KEY" if judge_llm.provider == "anthropic" else "OPENAI_API_KEY"))
+print("judge cells will run" if HAVE_JUDGE else "No judge API key found: skipping section 3 (set ANTHROPIC_API_KEY, then re-run)")
+
+# %% 3a. judge the human-rating subset (300 answers)
+subset_runs = {s: r[r["eval_id"].isin(subset_ids)] for s, r in runs.items()}
+judged_sub = None if not HAVE_JUDGE else pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in subset_runs.items()])
+if judged_sub is not None:
+    judged_sub.to_csv(C.TABLES / "task2_judge_scores_subset.csv", index=False)
+if judged_sub is not None and final_h.exists() and key_path.exists():   # key_path = human_key.csv, kept by Ziming until rating is finished
+    jh = judge_vs_human(judged_sub, pd.read_csv(final_h), pd.read_csv(key_path))
+    display(jh); jh.to_csv(C.TABLES / "task2_judge_vs_human.csv", index=False)
+
+# %% 3b. judge every answer (436 × 3) once 3a looks acceptable
+RUN_FULL_JUDGE = HAVE_JUDGE and os.getenv("RUN_FULL_JUDGE", "0") == "1"
+if RUN_FULL_JUDGE:
+    judged = pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in runs.items()])
+    judged.to_csv(C.TABLES / "task2_judge_scores_raw.csv", index=False)
+    st = score_table(judged, ev); display(st); st.to_csv(C.TABLES / "task2_judge_scores_by_set.csv")
+    overall = judged.groupby("system")[["relevance", "step_coverage", "clarity", "grounded", "unsafe", "behaviour_ok"]] \
+                    .apply(lambda g: g.apply(pd.to_numeric, errors="coerce").mean()).round(3)
+    display(overall); overall.to_csv(C.TABLES / "task2_judge_scores_overall.csv")
 
 # %% [markdown]
 # ## 4. What goes in the report (Model Training & Evaluation, 40 pts)

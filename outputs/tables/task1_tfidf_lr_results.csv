@@ -1,0 +1,4 @@
+model,eval_set,n,accuracy,macro_f1,ms_per_query
+tfidf_lr,bitext_test,3831,0.9992,0.9991,0.038
+tfidf_lr,banking77_mapped,520,0.4096,0.5158,0.05
+tfidf_lr,banking77_mapped_strict,240,0.5542,0.6302,0.048

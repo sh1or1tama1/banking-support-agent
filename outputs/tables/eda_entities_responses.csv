@@ -1,0 +1,17 @@
+entity,count,example
+CARDINAL,6490,1
+ORG,843,MasterCard
+WORK_OF_ART,727,Register
+PERSON,230,X.
+DATE,217,the last 30 days
+PRODUCT,60,Cancel
+LAW,44,"the ""Manage Cards"
+ORDINAL,34,First
+EVENT,31,"the ""Forgot Password"
+TIME,25,24-hour
+GPE,18,VA
+MONEY,5,several hundred dollars
+QUANTITY,2,3.
+NORP,2,X.
+LANGUAGE,1,Finish
+PERCENT,1,between 3% to 20%

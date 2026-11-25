@@ -41,6 +41,7 @@ from typing import Any, Callable, Optional, TypedDict
 
 from langgraph.graph import END, StateGraph
 
+from .. import config as C
 from ..llm.client import LLMClient, parse_json
 from ..llm.prompts import load_prompt
 from .retriever import format_context, hybrid_search
@@ -84,14 +85,17 @@ class AgenticRAG(_Base):
 
     def __init__(self, llm: LLMClient, dense, bm25=None, intents: list[str] | None = None,
                  classifier: Callable[[str], tuple[str, float]] | None = None,
-                 cfg: AgenticConfig | None = None, name: str | None = None):
+                 cfg: AgenticConfig | None = None, name: str | None = None, prompt_version: str = "v1"):
         super().__init__(llm)
         self.dense, self.bm25, self.classifier = dense, bm25, classifier
         self.cfg = cfg or AgenticConfig()
         self.intents = intents or sorted(dense.kb["intent"].unique())
         if name:
             self.name = name
-        self.p = {k: load_prompt(f"agentic_{k}_v1") for k in ("analyze", "grade", "rewrite", "generate", "validate")}
+        # prompt_version picks prompts/agentic_<step>_<version>.md; a step without that version falls back to v1
+        self.p = {k: load_prompt(f"agentic_{k}_{prompt_version}" if (C.PROMPTS / f"agentic_{k}_{prompt_version}.md").exists()
+                                 else f"agentic_{k}_v1")
+                  for k in ("analyze", "grade", "rewrite", "generate", "validate")}
         self.graph = self._build()
 
     # ------------------------------------------------------------ helpers

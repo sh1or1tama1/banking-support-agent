@@ -14,7 +14,7 @@
 import sys, os, subprocess
 IN_COLAB = "google.colab" in sys.modules
 if IN_COLAB:  # Colab: clone the team repo once per session, install requirements, load API keys from Secrets
-    REPO_URL = "https://github.com/<your-team>/banking-support-agent.git"   # <- set once
+    REPO_URL = "https://github.com/sh1or1tama1/banking-support-agent.git"
     if not os.path.exists("/content/banking-support-agent"):
         subprocess.run(["git", "clone", REPO_URL, "/content/banking-support-agent"], check=True)
     os.chdir("/content/banking-support-agent")
@@ -38,7 +38,10 @@ from src.rag.systems import DirectLLM, NaiveRAG
 from src.llm.client import LLMClient
 from src.eval.harness import run_system, summarize, escalation_confusion
 
-LIMIT = None   # e.g. 20 for a first, cheap test run
+LIMIT = int(os.getenv("LIMIT")) if os.getenv("LIMIT") else None   # e.g. 20 for a first, cheap test run
+# Prefix for run files. Use it for provisional runs (e.g. a local model) so they never collide with
+# the official outputs/runs/direct_llm.jsonl and naive_rag.jsonl (run_system resumes existing files).
+RUN_PREFIX = os.getenv("RUN_PREFIX", "")
 
 # %% [markdown]
 # ## 1. Frozen evaluation set
@@ -82,7 +85,7 @@ retr.to_csv(C.TABLES / "retrieval_proxy_metrics.csv", index=False)
 llm = LLMClient()
 print("provider:", llm.provider, "| model:", llm.model)
 systems = [DirectLLM(llm), NaiveRAG(llm, dense, k=C.RAG_TOP_K)]
-runs = {s.name: run_system(s, ev, limit=LIMIT) for s in systems}
+runs = {s.name: run_system(s, ev, tag=RUN_PREFIX + s.name, limit=LIMIT) for s in systems}
 
 # %%
 for name, run in runs.items():

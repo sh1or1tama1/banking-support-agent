@@ -17,6 +17,7 @@ umap-learn>=0.5
 datasets>=2.18
 transformers>=4.44
 sentence-transformers>=3.0
+accelerate>=1.1      # needed by transformers.Trainer (preinstalled in Colab, not elsewhere)
 rank-bm25>=0.2.2
 
 # LLM + agents

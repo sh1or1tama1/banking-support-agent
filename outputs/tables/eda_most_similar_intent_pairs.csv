@@ -1,0 +1,11 @@
+intent_a,intent_b,cosine
+get_password,set_up_password,0.92354685
+cancel_loan,cancel_mortgage,0.867857
+check_loan_payments,check_mortgage_payments,0.8466731
+activate_card,activate_card_international_usage,0.81286645
+apply_for_loan,apply_for_mortgage,0.79231644
+apply_for_mortgage,check_mortgage_payments,0.784047
+check_current_balance_on_card,check_recent_transactions,0.76961404
+apply_for_loan,check_loan_payments,0.7574364
+apply_for_loan,cancel_loan,0.74623007
+apply_for_mortgage,cancel_mortgage,0.74571323

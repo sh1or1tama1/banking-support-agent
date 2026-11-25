@@ -14,7 +14,7 @@
 import sys, os, subprocess
 IN_COLAB = "google.colab" in sys.modules
 if IN_COLAB:  # Colab: clone the team repo once per session, install requirements, load API keys from Secrets
-    REPO_URL = "https://github.com/<your-team>/banking-support-agent.git"   # <- set once
+    REPO_URL = "https://github.com/sh1or1tama1/banking-support-agent.git"
     if not os.path.exists("/content/banking-support-agent"):
         subprocess.run(["git", "clone", REPO_URL, "/content/banking-support-agent"], check=True)
     os.chdir("/content/banking-support-agent")
@@ -122,9 +122,26 @@ display(save(eda.synthetic_vs_real(df, b77), "eda_synthetic_vs_real"))
 # Real customers write differently (length, vocabulary) -> justification for the BANKING77 external test.
 
 # %% [markdown]
-# ## 7. Findings to carry into the report (fill in after running)
-# 1. Class balance: … → we report Macro-F1 but accuracy is also meaningful.
-# 2. Templating: …% of responses share the top opening → reference-similarity metrics are inflated; use rubric + LLM judge.
-# 3. Placeholders: … → policy rule 2 and the `invented_*` checks.
-# 4. Most similar intents: … → expected confusions.
-# 5. Synthetic vs real gap: … → external test on BANKING77.
+# ## 7. Findings to carry into the report (filled in from the run of 2026-11-22)
+# 1. **Class balance:** the 26 intents are nearly balanced (947-1,000 rows each), except `get_password` (799)
+#    and `set_up_password` (901). CARD and LOAN hold 6 intents each. → Accuracy and Macro-F1 will be close; we report both.
+# 2. **Templating:** queries are short (median 11 words, max 23; 0% exceed 64 BERT tokens) and heavily templated:
+#    only 25% of queries and 4.6% of responses have a distinct opening 5-gram, and 18% of responses start with
+#    "I'm here to assist you". Even after the grouped split, 52% of test queries have a near-paraphrase
+#    (char cosine ≥ 0.9, same intent) in train (random split: 60%); exact duplicates: 0.
+#    → In-distribution scores will be near the ceiling and reference-similarity metrics are inflated:
+#    use the rubric + LLM judge, and BANKING77 for generalisation.
+# 3. **Placeholders:** 55% of responses (14,064) contain `{{placeholders}}` and no query does. Most common:
+#    Customer Support Phone Number (7,879), Company Website URL (6,063), Credit Card (5,310), Working Hours (3,024).
+#    3 responses are refusals ("I'm unable to assist…") and sit in the train split / knowledge base.
+#    → Policy rule 2 (placeholders instead of invented facts) and the `invented_*` checks.
+# 4. **Most similar intents** (mean embedding cosine): get_password vs set_up_password (0.92), cancel_loan vs
+#    cancel_mortgage (0.87), check_loan_payments vs check_mortgage_payments (0.85), activate_card vs
+#    activate_card_international_usage (0.81). → Expected confusions; why the agent filters retrieval by intent
+#    only above a confidence threshold.
+# 5. **Synthetic vs real gap:** BANKING77 queries have a similar length (11.8 vs 11.1 words) but only 10% of their
+#    word types appear in Bitext queries (69% of tokens). Frequent real words absent from Bitext: why, pending,
+#    declined, charged, refund, exchange, app, pin. Real customers often ask *why* something happened to a
+#    specific transaction; Bitext only asks *how to* do a task. Only 13 of 77 BANKING77 intents map to Bitext
+#    with high/medium confidence; 61 are unsupported. → External test (`b77_real_inscope`) and escalation test
+#    (`b77_unsupported`).

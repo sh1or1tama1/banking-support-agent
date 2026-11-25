@@ -10,7 +10,7 @@
 import sys, os, subprocess
 IN_COLAB = "google.colab" in sys.modules
 if IN_COLAB:  # Colab: clone the team repo once per session, install requirements, load API keys from Secrets
-    REPO_URL = "https://github.com/<your-team>/banking-support-agent.git"   # <- set once
+    REPO_URL = "https://github.com/sh1or1tama1/banking-support-agent.git"
     if not os.path.exists("/content/banking-support-agent"):
         subprocess.run(["git", "clone", REPO_URL, "/content/banking-support-agent"], check=True)
     os.chdir("/content/banking-support-agent")
@@ -42,7 +42,13 @@ print(len(train), len(val), len(test), "| subset", len(test_small), "| BANKING77
 
 # %%
 from src.classify.bert import train_bert, BertIntent
-model, tok, labels, history = train_bert(train, val)
+BERT_DIR = C.OUTPUTS / "bert_intent"
+if (BERT_DIR / "config.json").exists():   # trained elsewhere (e.g. notebooks/colab_train_bert.ipynb) -> reuse it
+    history = pd.read_csv(BERT_DIR / "training_history.csv")
+else:
+    model, tok, labels, history = train_bert(train, val)
+    history.to_csv(BERT_DIR / "training_history.csv", index=False)
+history.to_csv(C.TABLES / "task1_bert_training_history.csv", index=False)
 display(history[["epoch", "eval_accuracy", "eval_macro_f1", "eval_loss"]])
 bert = BertIntent()
 
