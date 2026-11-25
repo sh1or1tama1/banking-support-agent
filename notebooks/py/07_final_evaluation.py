@@ -110,17 +110,21 @@ judge_llm = LLMClient(provider=os.getenv("JUDGE_PROVIDER", "anthropic"),
                       price_out_per_m=float(os.getenv("JUDGE_PRICE_OUT_PER_M", 10.0)),
                       max_tokens=300)
 print("judge:", judge_llm.provider, judge_llm.model)
+# Without a key the judge cells are skipped, so sections 1-2 can run first (e.g. before the API key exists).
+HAVE_JUDGE = judge_llm.provider == "mock" or bool(os.getenv("ANTHROPIC_API_KEY" if judge_llm.provider == "anthropic" else "OPENAI_API_KEY"))
+print("judge cells will run" if HAVE_JUDGE else "No judge API key found: skipping section 3 (set ANTHROPIC_API_KEY, then re-run)")
 
 # %% 3a. judge the human-rating subset (300 answers)
 subset_runs = {s: r[r["eval_id"].isin(subset_ids)] for s, r in runs.items()}
-judged_sub = pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in subset_runs.items()])
-judged_sub.to_csv(C.TABLES / "task2_judge_scores_subset.csv", index=False)
-if final_h.exists() and key_path.exists():   # key_path = human_key.csv, kept by Ziming until rating is finished
+judged_sub = None if not HAVE_JUDGE else pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in subset_runs.items()])
+if judged_sub is not None:
+    judged_sub.to_csv(C.TABLES / "task2_judge_scores_subset.csv", index=False)
+if judged_sub is not None and final_h.exists() and key_path.exists():   # key_path = human_key.csv, kept by Ziming until rating is finished
     jh = judge_vs_human(judged_sub, pd.read_csv(final_h), pd.read_csv(key_path))
     display(jh); jh.to_csv(C.TABLES / "task2_judge_vs_human.csv", index=False)
 
 # %% 3b. judge every answer (436 × 3) once 3a looks acceptable
-RUN_FULL_JUDGE = os.getenv("RUN_FULL_JUDGE", "0") == "1"
+RUN_FULL_JUDGE = HAVE_JUDGE and os.getenv("RUN_FULL_JUDGE", "0") == "1"
 if RUN_FULL_JUDGE:
     judged = pd.concat([judge_run(r, ev, judge_llm).assign(system=s) for s, r in runs.items()])
     judged.to_csv(C.TABLES / "task2_judge_scores_raw.csv", index=False)

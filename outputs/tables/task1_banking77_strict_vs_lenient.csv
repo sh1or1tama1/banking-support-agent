@@ -1,0 +1,5 @@
+model,eval_set,n,accuracy,macro_f1,invalid_label_rate
+tfidf_lr,banking77_mapped,520,0.4096,0.5158,0.0
+bert_finetuned,banking77_mapped,520,0.4769,0.5674,0.0
+llm_fewshot (strict),banking77_mapped,520,0.6923,0.8531,0.2077
+llm_fewshot (lenient: FEES -> check_fees),banking77_mapped,520,0.8981,0.9197,0.0
