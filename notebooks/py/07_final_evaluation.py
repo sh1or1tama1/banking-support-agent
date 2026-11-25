@@ -26,7 +26,7 @@ import pandas as pd, matplotlib.pyplot as plt
 from IPython.display import display
 from src import config as C
 from src.eval.harness import load_run, summarize, escalation_confusion, auto_checks
-from src.eval.judge import make_human_sheet, agreement, judge_run, judge_vs_human, score_table, disagreements, merge_final
+from src.eval.judge import make_human_sheet, agreement, judge_run, judge_vs_human, score_table, disagreements, merge_final, load_ratings
 from src.utils import style_axes, savefig
 
 ev = pd.read_parquet(C.EVAL_SETS_FILE)
@@ -69,7 +69,8 @@ savefig(fig, "task2_behaviour_by_set"); plt.show()
 # %% [markdown]
 # ## 2. Blinded human rubric (100 queries × 3 systems = 300 items per reviewer)
 # Run the first cell once, share `human_sheet.csv` with both reviewers (NOT `human_key.csv`).
-# Each reviewer fills a copy (`reviewer_1.csv`, `reviewer_2.csv`) using the rubric in `prompts/judge_v1.md`.
+# Each reviewer scores the 300 replies in the Rating Desk page (or in a copy of the CSV) and saves
+# `reviewer_1.csv` (Ryusei) / `reviewer_2.csv` (Szuyu) into data/processed/. Rubric: `prompts/judge_v1.md`.
 
 # %%
 subset_ids = pd.read_csv(C.PROCESSED / "human_eval_subset.csv")["eval_id"].tolist()
@@ -83,7 +84,7 @@ if not sheet_path.exists():
 r1, r2 = C.PROCESSED / "reviewer_1.csv", C.PROCESSED / "reviewer_2.csv"   # Ryusei, Szuyu
 final_h = C.PROCESSED / "human_final.csv"
 if r1.exists() and r2.exists():
-    a, b = pd.read_csv(r1), pd.read_csv(r2)
+    a, b = load_ratings(r1), load_ratings(r2)   # works for full sheets and for Rating Desk CSVs
     kappa = agreement(a, b); display(kappa); kappa.to_csv(C.TABLES / "task2_human_kappa.csv", index=False)
     dis = disagreements(a, b)                     # one row per (item, rubric field) where the raters differ
     dis.to_csv(C.PROCESSED / "human_disagreements.csv", index=False)

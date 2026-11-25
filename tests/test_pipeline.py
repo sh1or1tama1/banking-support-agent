@@ -145,3 +145,13 @@ def test_disagreements_and_merge_final():
     d["agreed"] = [2]
     final = merge_final(a, d)
     assert final.loc[1, "relevance"] == 2 and final.loc[0, "relevance"] == 1
+
+
+def test_load_ratings_joins_sheet(tmp_path):
+    from src.eval.judge import ITEMS, load_ratings
+    sheet = pd.DataFrame({"eval_id": ["e1"], "blind_system": ["S1"], "query": ["q"], "expected_action": ["answer"],
+                          "action": ["answer"], "answer": ["a"], **{k: [None] for k in ITEMS}, "notes": [""]})
+    sheet.to_csv(tmp_path / "sheet.csv", index=False)
+    pd.DataFrame({"eval_id": ["e1"], "blind_system": ["S1"], **{k: [1] for k in ITEMS}, "notes": ["x"]}).to_csv(tmp_path / "r.csv", index=False)
+    r = load_ratings(tmp_path / "r.csv", tmp_path / "sheet.csv")
+    assert r.loc[0, "query"] == "q" and r.loc[0, "relevance"] == 1

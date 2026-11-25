@@ -78,6 +78,22 @@ def agreement(a: pd.DataFrame, b: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
+def load_ratings(path, sheet_path=None) -> pd.DataFrame:
+    """Read one rater's file. Files saved from the Rating Desk page hold only ids + scores + notes;
+    the query and answer columns are joined back from human_sheet.csv so every helper sees the same shape."""
+    from .. import config as C
+
+    r = pd.read_csv(path)
+    if "query" not in r.columns or "answer" not in r.columns:
+        sheet = pd.read_csv(sheet_path or (C.PROCESSED / "human_sheet.csv"))
+        r = sheet[["eval_id", "blind_system", "query", "expected_action", "action", "answer"]].merge(
+            r, on=["eval_id", "blind_system"], how="left")
+    missing = r[ITEMS].isna().any(axis=1).sum()
+    if missing:
+        print(f"[load_ratings] {path}: {missing} of {len(r)} replies are not fully scored yet")
+    return r
+
+
 def disagreements(a: pd.DataFrame, b: pd.DataFrame) -> pd.DataFrame:
     """Every (eval_id, blind_system, item) where the two raters gave different scores, for joint adjudication."""
     m = a.merge(b, on=["eval_id", "blind_system"], suffixes=("_r1", "_r2"))
