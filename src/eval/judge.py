@@ -78,11 +78,40 @@ def agreement(a: pd.DataFrame, b: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
+def disagreements(a: pd.DataFrame, b: pd.DataFrame) -> pd.DataFrame:
+    """Every (eval_id, blind_system, item) where the two raters gave different scores, for joint adjudication."""
+    m = a.merge(b, on=["eval_id", "blind_system"], suffixes=("_r1", "_r2"))
+    rows = []
+    for k in ITEMS:
+        x, y = pd.to_numeric(m[f"{k}_r1"], errors="coerce"), pd.to_numeric(m[f"{k}_r2"], errors="coerce")
+        for i in m.index[(x != y) & x.notna() & y.notna()]:
+            rows.append({"eval_id": m.at[i, "eval_id"], "blind_system": m.at[i, "blind_system"], "item": k,
+                         "query": m.at[i, "query_r1"], "answer": m.at[i, "answer_r1"],
+                         "rater_1": int(x[i]), "rater_2": int(y[i]), "agreed": ""})
+    return pd.DataFrame(rows, columns=["eval_id", "blind_system", "item", "query", "answer", "rater_1", "rater_2", "agreed"])
+
+
+def merge_final(a: pd.DataFrame, resolved: pd.DataFrame) -> pd.DataFrame:
+    """Final human scores = rater 1's scores where the raters agreed, the jointly `agreed` value where they did not.
+    A disagreement left blank falls back to the mean of the two (rounded half up) and is counted in `n_fallback`."""
+    final = a[["eval_id", "blind_system"] + ITEMS].copy()
+    for c in ITEMS:
+        final[c] = pd.to_numeric(final[c], errors="coerce")
+    fallback = 0
+    for r in resolved.itertuples():
+        val = pd.to_numeric(r.agreed, errors="coerce")
+        if pd.isna(val):
+            val, fallback = int((r.rater_1 + r.rater_2) / 2 + 0.5), fallback + 1
+        final.loc[(final.eval_id == r.eval_id) & (final.blind_system == r.blind_system), r.item] = val
+    final.attrs["n_fallback"] = fallback
+    return final
+
+
 def judge_vs_human(judge: pd.DataFrame, human: pd.DataFrame, key: pd.DataFrame) -> pd.DataFrame:
     """Agreement between the LLM judge and the adjudicated human scores (same items)."""
     h = human.merge(key, on=["eval_id", "blind_system"])[["eval_id", "system"] + ITEMS]
     j = judge[["eval_id", "system"] + ITEMS]
-    common = h.merge(j[["eval_id", "system"]], on=["eval_id", "system"])
+    common = h[["eval_id", "system"]].merge(j[["eval_id", "system"]], on=["eval_id", "system"]).drop_duplicates()
     as_blind = lambda d: d.merge(common, on=["eval_id", "system"]).rename(columns={"system": "blind_system"})
     return agreement(as_blind(h), as_blind(j))
 

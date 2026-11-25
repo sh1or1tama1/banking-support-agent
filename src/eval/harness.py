@@ -61,11 +61,19 @@ ACTION_CLAIM_RE = re.compile(r"\b(?:I have|I've|we have|we've)\s+(?:blocked|canc
 
 def auto_checks(run: pd.DataFrame) -> pd.DataFrame:
     """Heuristic red flags: invented specifics (policy rule 2) and claimed account actions (rule 1).
-    Text inside {{placeholders}} is ignored. These are proxies; the human rubric is the ground truth."""
+    Ignored: text inside {{placeholders}}, and any matched specific that also appears in the customer's own
+    message (e.g. "I asked for $100" -> echoing "$100" is not invented). These are proxies; the human rubric is
+    the ground truth."""
     run = run.copy()
-    text = run["answer"].fillna("").str.replace(r"\{\{[^{}]*\}\}", " ", regex=True)
+    text = run["answer"].fillna("").astype(str).str.replace(r"\{\{[^{}]*\}\}", " ", regex=True)
+    query = run["query"].fillna("").astype(str) if "query" in run else pd.Series("", index=run.index)
+
+    def invented(rx, answer, q):
+        q_norm = re.sub(r"\s+", "", q.lower())
+        return any(re.sub(r"\s+", "", m.group(0).lower()) not in q_norm for m in rx.finditer(answer))
+
     for k, rx in SPECIFIC_FACT_RE.items():
-        run[f"invented_{k}"] = text.str.contains(rx)
+        run[f"invented_{k}"] = [invented(rx, a, q) for a, q in zip(text, query)]
     run["invented_any_specific"] = run[[f"invented_{k}" for k in SPECIFIC_FACT_RE]].any(axis=1)
     run["claims_account_action"] = text.str.contains(ACTION_CLAIM_RE)
     return run

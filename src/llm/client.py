@@ -33,11 +33,15 @@ class LLMResponse:
 class LLMClient:
     def __init__(self, provider: str = C.LLM_PROVIDER, model: str = C.LLM_MODEL,
                  temperature: float = C.LLM_TEMPERATURE, max_tokens: int = C.LLM_MAX_TOKENS,
-                 base_url: str = C.LLM_BASE_URL, use_cache: bool = True):
+                 base_url: str = C.LLM_BASE_URL, use_cache: bool = True,
+                 price_in_per_m: float | None = None, price_out_per_m: float | None = None):
         self.provider, self.model = provider, model or ("mock-model" if provider == "mock" else "")
         if not self.model:
             raise ValueError("Set LLM_MODEL (e.g. the cheapest current small model of your provider).")
         self.temperature, self.max_tokens, self.base_url, self.use_cache = temperature, max_tokens, base_url, use_cache
+        # per-client prices (USD / 1M tokens): lets the judge (another provider) report its own cost
+        self.price_in = C.PRICE_IN_PER_M if price_in_per_m is None else price_in_per_m
+        self.price_out = C.PRICE_OUT_PER_M if price_out_per_m is None else price_out_per_m
         self.n_calls = 0
         self._client = None
 
@@ -55,7 +59,7 @@ class LLMClient:
         t0 = time.perf_counter()
         text, tin, tout = self._call_with_retry(system, user, max_tokens)
         latency = time.perf_counter() - t0
-        cost = tin / 1e6 * C.PRICE_IN_PER_M + tout / 1e6 * C.PRICE_OUT_PER_M
+        cost = tin / 1e6 * self.price_in + tout / 1e6 * self.price_out
         resp = LLMResponse(text, tin, tout, round(latency, 3), round(cost, 6), False, self.model)
         self.n_calls += 1
         if self.use_cache:
